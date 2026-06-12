@@ -1,0 +1,6 @@
+{
+    "name": "SaaS Dev",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node",
+    "postCreateCommand": "npm install",
+    "forwardPorts": [3000]
+}
