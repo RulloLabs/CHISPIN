@@ -1,0 +1,19 @@
+# Root gitignore
+*.zip
+.DS_Store
+Thumbs.db
+
+# App subfolder ignores
+app/node_modules/
+app/dist/
+app/.vercel/
+app/dist-ssr/
+app/*.local
+app/.vscode/*
+!app/.vscode/extensions.json
+app/.idea/
+app/*.suo
+app/*.ntvs*
+app/*.njsproj
+app/*.sln
+app/*.sw?
