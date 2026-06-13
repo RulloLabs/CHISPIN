@@ -1,28 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Flame } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useReservation } from '@/context/ReservationContext';
-import { useScrollDirection } from '@/hooks/useScrollDirection';
 
 const navLinks = [
-  { label: 'Origen', href: '#origen' },
-  { label: 'Producto', href: '#producto' },
-  { label: 'Fundadores', href: '#fundadores' },
-  { label: 'Comunidad', href: '#comunidad' },
+  { label: 'Inicio', href: '#hero' },
+  { label: 'Historia', href: '#origen' },
+  { label: 'El Peluche', href: '#producto' },
+  { label: 'Experiencia', href: '#experiencia' },
+  { label: 'La Manada', href: '#comunidad' },
   { label: 'FAQ', href: '#faq' },
 ];
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { scrollY } = useScrollDirection();
+  const [scrolled, setScrolled] = useState(false);
   const { openClawMachine } = useReservation();
-  const isScrolled = scrollY > 50;
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
@@ -34,47 +35,47 @@ export function Navigation() {
 
   return (
     <>
-      <nav 
+      <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-negro/90 backdrop-blur-xl border-b border-white/5' 
+          scrolled
+            ? 'bg-[#080012]/95 backdrop-blur-xl shadow-lg shadow-black/40'
             : 'bg-transparent'
         }`}
-        style={{ height: isScrolled ? 60 : 72 }}
       >
-        <div className="container-custom h-full flex items-center justify-between">
+        <div className="container-custom flex items-center justify-between h-16 md:h-[68px]">
+
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <Flame className="w-6 h-6 text-chispa group-hover:scale-110 transition-transform" />
-            <span className="font-poppins font-extrabold text-xl text-chispa tracking-tight">
-              CHISPÍN
-            </span>
+          <a href="#hero" onClick={e => { e.preventDefault(); scrollTo('#hero'); }}
+            className="flex items-center gap-2 group">
+            <img src="/images/logo.png" alt="Chispín" className="h-8 w-auto" />
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navLinks.map(link => (
               <button
                 key={link.href}
                 onClick={() => scrollTo(link.href)}
-                className="text-white/70 hover:text-chispa text-sm font-medium transition-colors relative group"
+                className="text-white/70 hover:text-white text-sm font-nunito font-700 uppercase tracking-wider transition-colors duration-200 relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-chispa transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-[#FFB800] transition-all duration-300 group-hover:w-full rounded-full" />
               </button>
             ))}
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-4">
-            <button onClick={openClawMachine} className="hidden md:block btn-primary text-xs py-2.5 px-6">
-              RESERVAR
+          <div className="flex items-center gap-3">
+            <button
+              onClick={openClawMachine}
+              className="hidden md:flex btn-primary text-xs py-2.5 px-5"
+            >
+              🔥 Acepta tu Chispín
             </button>
-            
-            {/* Mobile menu button */}
-            <button 
+            <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-white"
+              className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+              aria-label="Menú"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -85,22 +86,23 @@ export function Navigation() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <div className="absolute right-0 top-0 bottom-0 w-72 bg-gris-oscuro/95 backdrop-blur-xl p-6 pt-20">
-            <div className="flex flex-col gap-4">
-              {navLinks.map(link => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollTo(link.href)}
-                  className="text-white/80 hover:text-chispa text-lg font-medium text-left py-2 transition-colors"
-                >
-                  {link.label}
-                </button>
-              ))}
-              <button onClick={() => { setMobileOpen(false); openClawMachine(); }} className="btn-primary mt-4 text-center">
-                RESERVAR MI CHISPÍN
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+          <div className="absolute right-0 top-0 bottom-0 w-72 bg-[#0E0030]/98 backdrop-blur-xl p-6 pt-20 flex flex-col gap-5">
+            {navLinks.map(link => (
+              <button
+                key={link.href}
+                onClick={() => scrollTo(link.href)}
+                className="text-white/80 hover:text-[#FFB800] font-nunito font-bold text-base uppercase tracking-wider text-left py-2 border-b border-white/5 transition-colors"
+              >
+                {link.label}
               </button>
-            </div>
+            ))}
+            <button
+              onClick={() => { setMobileOpen(false); openClawMachine(); }}
+              className="btn-primary mt-4 w-full"
+            >
+              🔥 Acepta tu Chispín
+            </button>
           </div>
         </div>
       )}

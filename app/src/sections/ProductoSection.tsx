@@ -1,134 +1,118 @@
 import { useState } from 'react';
-import { Check } from 'lucide-react';
-import { SectionLabel } from '@/components/SectionLabel';
+import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { useMouseTilt } from '@/hooks/useMouseTilt';
 import { useReservation } from '@/context/ReservationContext';
 
 const views = [
-  { id: 'front', label: 'Frontal', img: '/images/chispin-front.png' },
-  { id: 'back', label: 'Trasera', img: '/images/chispin-back.png' },
-  { id: 'side', label: 'Lateral', img: '/images/chispin-side.png' },
-  { id: 'detail', label: 'Detalle', img: '/images/chispin-detail.png' },
+  { label: 'Frontal', img: '/images/chispin-front.png' },
+  { label: 'Trasera', img: '/images/chispin-back.png' },
+  { label: 'Lateral', img: '/images/chispin-side.png' },
 ];
 
 const features = [
   '18 cm de ternura',
-  'Ultra suave al tacto',
+  'Peluche ultra suave',
   'Bordados premium',
-  'Cola con llama característica',
+  'Cola de fuego característica',
   'Pañuelo icónico morado',
   'Edición Fundadores numerada',
 ];
 
 export function ProductoSection() {
-  const [activeView, setActiveView] = useState('front');
-  const { ref, tilt } = useMouseTilt(10);
+  const [idx, setIdx] = useState(0);
   const { openClawMachine } = useReservation();
-  
-  const currentImg = views.find(v => v.id === activeView)?.img || views[0].img;
+
+  const prev = () => setIdx(i => (i - 1 + views.length) % views.length);
+  const next = () => setIdx(i => (i + 1) % views.length);
 
   return (
-    <section id="producto" className="relative section-padding bg-negro">
-      {/* Purple glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-20"
-        style={{ background: 'radial-gradient(circle, rgba(107,47,184,0.5) 0%, transparent 70%)' }} />
-      
+    <section id="producto" className="relative section-padding overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #0D0025 0%, #080012 100%)' }}>
+
+      {/* Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(74,14,143,0.2) 0%, transparent 70%)' }} />
+
       <div className="container-custom relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          {/* Left: 3D Product Showcase */}
+        <ScrollReveal className="text-center mb-12">
+          <div className="section-label">El Peluche</div>
+          <h2 className="font-bangers text-4xl md:text-5xl lg:text-6xl text-white">
+            Cada detalle cuenta una historia
+          </h2>
+        </ScrollReveal>
+
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+
+          {/* LEFT: Carousel */}
           <ScrollReveal>
-            <div className="relative">
-              {/* Badge */}
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                <span className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full gradient-gold text-negro font-inter font-bold text-xs uppercase tracking-wider">
-                  Edición Limitada
-                </span>
-              </div>
-              
-              {/* Main image with 3D tilt */}
-              <div 
-                ref={ref}
-                className="relative flex justify-center items-center h-[350px] md:h-[450px]"
-                style={{ perspective: '1000px' }}
-              >
-                <div
-                  className="transition-transform duration-100 ease-out"
-                  style={{
-                    transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                    transformStyle: 'preserve-3d',
-                  }}
-                >
-                  <img 
-                    src={currentImg}
-                    alt="Chispín desde diferentes ángulos"
-                    className="w-72 h-72 md:w-96 md:h-96 object-contain drop-shadow-2xl transition-opacity duration-300"
-                  />
-                </div>
-                
+            <div className="relative flex flex-col items-center">
+              {/* Main image */}
+              <div className="relative w-full flex items-center justify-center h-[320px] md:h-[420px]">
                 {/* Glow behind */}
-                <div className="absolute inset-0 flex items-center justify-center -z-10">
-                  <div className="w-[300px] h-[300px] rounded-full opacity-30"
-                    style={{ background: 'radial-gradient(circle, rgba(255,122,0,0.4) 0%, transparent 60%)' }} />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-72 h-72 rounded-full"
+                    style={{ background: 'radial-gradient(circle, rgba(255,107,0,0.25) 0%, transparent 65%)' }} />
                 </div>
+
+                <img
+                  key={idx}
+                  src={views[idx].img}
+                  alt={`Chispín — ${views[idx].label}`}
+                  className="relative h-full object-contain drop-shadow-2xl transition-all duration-300 animate-float"
+                />
               </div>
-              
-              {/* Thumbnails */}
-              <div className="flex justify-center gap-3 mt-6">
-                {views.map(view => (
-                  <button
-                    key={view.id}
-                    onClick={() => setActiveView(view.id)}
-                    className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                      activeView === view.id 
-                        ? 'border-chispa shadow-glow-chispa' 
-                        : 'border-white/10 hover:border-white/30'
-                    }`}
-                  >
-                    <img src={view.img} alt={view.label} className="w-full h-full object-cover" />
-                  </button>
-                ))}
+
+              {/* Nav arrows */}
+              <div className="flex items-center gap-6 mt-4">
+                <button onClick={prev}
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors">
+                  <ChevronLeft className="w-5 h-5 text-white" />
+                </button>
+
+                {/* Dots */}
+                <div className="flex gap-2">
+                  {views.map((_, i) => (
+                    <button key={i} onClick={() => setIdx(i)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        i === idx ? 'bg-[#FFB800] w-6' : 'bg-white/30'
+                      }`} />
+                  ))}
+                </div>
+
+                <button onClick={next}
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors">
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </button>
               </div>
             </div>
           </ScrollReveal>
-          
-          {/* Right: Features */}
-          <div>
-            <ScrollReveal>
-              <SectionLabel text="El Peluche" />
-              <h2 className="font-poppins font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-6">
-                Diseñado para durar toda la vida
-              </h2>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.1}>
-              <ul className="space-y-4 mb-8">
-                {features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full gradient-fire flex items-center justify-center shrink-0">
-                      <Check className="w-3.5 h-3.5 text-negro" />
-                    </div>
-                    <span className="text-white/80">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.2}>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <span className="text-3xl font-poppins font-black text-gradient-fire">
-                  39€
-                </span>
-                <button onClick={openClawMachine} className="btn-primary">
-                  QUIERO MI CHISPÍN
-                </button>
-              </div>
-              <p className="text-white/40 text-sm mt-3">
-                Envío incluido en toda España
-              </p>
-            </ScrollReveal>
-          </div>
+
+          {/* RIGHT: Features */}
+          <ScrollReveal delay={0.15}>
+            <ul className="space-y-3 mb-8">
+              {features.map(f => (
+                <li key={f} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                    style={{ background: 'linear-gradient(135deg,#FFB800,#FF6B00)' }}>
+                    <Check className="w-3 h-3 text-[#1A0040]" strokeWidth={3} />
+                  </div>
+                  <span className="text-white/80 font-nunito text-sm md:text-base">{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex items-center gap-4 mb-4">
+              <span className="font-bangers text-5xl" style={{
+                background: 'linear-gradient(135deg,#FFB800,#FF6B00)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+              }}>39€</span>
+              <span className="text-white/40 font-nunito text-sm">Envío incluido en España</span>
+            </div>
+
+            <button onClick={openClawMachine} className="btn-primary text-sm px-8 py-3.5">
+              VER TODOS LOS ÁNGULOS
+            </button>
+          </ScrollReveal>
         </div>
       </div>
     </section>

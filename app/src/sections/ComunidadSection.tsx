@@ -1,132 +1,113 @@
-import { SectionLabel } from '@/components/SectionLabel';
+import { Flame, Map } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { useReservation } from '@/context/ReservationContext';
 import CountUp from 'react-countup';
 
-const topProvincias = [
-  { name: 'Madrid', count: 1247, width: '100%' },
-  { name: 'Barcelona', count: 892, width: '72%' },
-  { name: 'Valencia', count: 634, width: '51%' },
-  { name: 'Sevilla', count: 421, width: '34%' },
-  { name: 'Zaragoza', count: 298, width: '24%' },
+const provinces = [
+  { name: 'Zaragoza', count: 892 },
+  { name: 'Madrid', count: 741 },
+  { name: 'Valencia', count: 612 },
+  { name: 'Barcelona', count: 589 },
+  { name: 'Teruel', count: 487, highlight: true },
 ];
 
 export function ComunidadSection() {
   const { reservationCount } = useReservation();
 
   return (
-    <section id="comunidad" className="relative section-padding bg-gris-oscuro">
-      <div className="container-custom">
-        {/* Header */}
-        <div className="text-center mb-12">
+    <section id="comunidad" className="relative section-padding overflow-hidden"
+      style={{ background: 'radial-gradient(ellipse at center, #1A0540 0%, #080012 70%)' }}>
+
+      <div className="container-custom relative z-10">
+        <ScrollReveal className="text-center mb-12">
+          <div className="section-label">La Manada</div>
+          <h2 className="font-bangers text-4xl md:text-5xl lg:text-6xl text-white">
+            LA MANADA<br />
+            <span style={{
+              background: 'linear-gradient(135deg,#FFB800,#FF6B00)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            }}>
+              DE CHISPÍN
+            </span>
+          </h2>
+          <p className="text-white/55 font-nunito mt-3">Cada día somos más. ¿Desde dónde nos acompañas?</p>
+        </ScrollReveal>
+
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+
+          {/* LEFT: Map + Counter */}
           <ScrollReveal>
-            <SectionLabel text="La Manada" color="yellow" />
-            <h2 className="font-poppins font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-              Ya forman parte de la manada
-            </h2>
-          </ScrollReveal>
-          
-          <ScrollReveal delay={0.1}>
-            <div className="inline-flex items-center gap-3 glass rounded-2xl px-8 py-4">
-              <span className="text-chispa font-poppins font-black text-4xl md:text-5xl">
-                <CountUp end={reservationCount} duration={2.5} separator="." />
-              </span>
-              <div className="text-left">
-                <span className="text-white/80 text-sm block">reservas</span>
-                <span className="text-white/40 text-xs">desde el lanzamiento</span>
+            <div className="relative">
+              {/* Counter badge */}
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <div className="glass rounded-full px-6 py-3 flex items-center gap-3"
+                  style={{ border: '1.5px solid rgba(255,184,0,0.4)' }}>
+                  <Flame className="w-5 h-5 text-[#FF6B00]" />
+                  <span className="font-bangers text-3xl text-[#FFB800] tracking-wider">
+                    <CountUp end={reservationCount} duration={2} separator="." />
+                  </span>
+                  <span className="text-white/70 font-nunito font-bold text-sm uppercase tracking-wide">
+                    Chispines Rescatados
+                  </span>
+                </div>
+              </div>
+
+              {/* Map */}
+              <div className="relative rounded-2xl overflow-hidden"
+                style={{ boxShadow: '0 0 60px rgba(74,14,143,0.4)' }}>
+                <img
+                  src="/images/spain-map-3d.png"
+                  alt="Mapa de España — La Manada de Chispín"
+                  className="w-full object-contain rounded-2xl"
+                />
+                <div className="absolute inset-0 rounded-2xl"
+                  style={{ background: 'linear-gradient(to top, rgba(8,0,18,0.3) 0%, transparent 60%)' }} />
               </div>
             </div>
           </ScrollReveal>
-        </div>
-        
-        {/* Spain Map SVG */}
-        <ScrollReveal>
-          <div className="relative max-w-2xl mx-auto mb-12">
-            <svg viewBox="0 0 600 450" className="w-full h-auto" fill="none">
-              {/* Spain outline */}
-              <path 
-                d="M180,380 L160,360 L140,340 L130,300 L120,260 L110,220 L100,180 L95,140 L100,100 L120,80 L150,70 L180,65 L220,60 L260,58 L300,55 L340,58 L380,65 L420,75 L450,90 L470,110 L480,140 L485,170 L480,200 L470,230 L460,260 L450,290 L440,320 L430,350 L420,380 L400,400 L380,410 L360,415 L340,420 L320,425 L300,430 L280,425 L260,420 L240,415 L220,410 L200,400 L190,390 Z"
-                fill="rgba(107,47,184,0.1)"
-                stroke="rgba(107,47,184,0.4)"
-                strokeWidth="1.5"
-              />
-              
-              {/* Province dots */}
-              {[
-                { cx: 280, cy: 120, r: 6, label: 'País Vasco' },
-                { cx: 320, cy: 100, r: 5, label: 'Navarra' },
-                { cx: 380, cy: 110, r: 4, label: 'Cataluña' },
-                { cx: 260, cy: 160, r: 7, label: 'Madrid' },
-                { cx: 220, cy: 200, r: 5, label: 'Extremadura' },
-                { cx: 300, cy: 220, r: 6, label: 'Valencia' },
-                { cx: 180, cy: 240, r: 5, label: 'Andalucía W' },
-                { cx: 240, cy: 280, r: 6, label: 'Andalucía E' },
-                { cx: 340, cy: 160, r: 4, label: 'Aragón' },
-                { cx: 150, cy: 130, r: 4, label: 'Galicia' },
-                { cx: 200, cy: 140, r: 3, label: 'Asturias' },
-                { cx: 400, cy: 300, r: 3, label: 'Baleares' },
-              ].map((dot, i) => (
-                <g key={i}>
-                  <circle 
-                    cx={dot.cx} 
-                    cy={dot.cy} 
-                    r={dot.r} 
-                    fill="#FFC83D"
-                    opacity="0.8"
-                  >
-                    <animate 
-                      attributeName="opacity" 
-                      values="0.4;0.9;0.4" 
-                      dur={`${2 + i * 0.3}s`} 
-                      repeatCount="indefinite" 
-                    />
-                  </circle>
-                  <circle 
-                    cx={dot.cx} 
-                    cy={dot.cy} 
-                    r={dot.r * 2} 
-                    fill="none"
-                    stroke="#FFC83D"
-                    strokeWidth="0.5"
-                    opacity="0.3"
-                  />
-                </g>
-              ))}
-              
-              {/* Legend */}
-              <text x="300" y="440" textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="12" fontFamily="Inter">
-                Cada punto es una familia de Chispín
-              </text>
-            </svg>
-          </div>
-        </ScrollReveal>
-        
-        {/* Top Provinces Ranking */}
-        <ScrollReveal>
-          <div className="max-w-lg mx-auto">
-            <h3 className="font-poppins font-bold text-lg text-white mb-4 text-center">
-              Top Provincias
-            </h3>
-            <div className="space-y-3">
-              {topProvincias.map((prov, i) => (
-                <div key={prov.name} className="flex items-center gap-3">
-                  <span className="text-white/40 text-sm w-6">{i + 1}</span>
-                  <span className="text-white/80 text-sm w-24">{prov.name}</span>
-                  <div className="flex-1 h-6 bg-white/5 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full gradient-purple rounded-full flex items-center justify-end pr-2 transition-all duration-1000"
-                      style={{ width: prov.width }}
-                    >
-                      <span className="text-white/80 text-xs font-medium">
-                        {prov.count.toLocaleString()}
-                      </span>
+
+          {/* RIGHT: Top Provinces */}
+          <ScrollReveal delay={0.15}>
+            <div className="glass rounded-2xl p-6" style={{ border: '1px solid rgba(255,184,0,0.15)' }}>
+              <h3 className="font-bangers text-xl text-[#FFB800] tracking-wider mb-5 uppercase">
+                Top Provincias
+              </h3>
+
+              <div className="space-y-3">
+                {provinces.map((p, i) => (
+                  <div key={p.name}
+                    className={`flex items-center gap-3 py-2.5 px-3 rounded-xl transition-all ${
+                      p.highlight
+                        ? 'bg-[rgba(255,107,0,0.1)] border border-[rgba(255,107,0,0.3)]'
+                        : 'border border-transparent hover:border-white/10'
+                    }`}>
+                    {/* Rank */}
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 font-nunito font-black text-xs"
+                      style={{
+                        background: i === 0 ? 'linear-gradient(135deg,#FFB800,#FF6B00)' : 'rgba(74,14,143,0.5)',
+                        color: i === 0 ? '#1A0040' : '#C8A5FF',
+                      }}>
+                      {i + 1}
                     </div>
+                    {/* Name */}
+                    <span className={`flex-1 font-nunito font-bold text-sm ${p.highlight ? 'text-[#FF6B00]' : 'text-white/70'}`}>
+                      {p.name}{p.highlight ? ' 🔥' : ''}
+                    </span>
+                    {/* Count */}
+                    <span className={`font-nunito font-black text-sm ${p.highlight ? 'text-[#FF6B00]' : 'text-[#FFB800]'}`}>
+                      {p.count.toLocaleString('es-ES')}
+                    </span>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              <button className="w-full mt-6 btn-outline text-xs py-3 flex items-center justify-center gap-2">
+                <Map className="w-4 h-4" />
+                VER MAPA COMPLETO
+              </button>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

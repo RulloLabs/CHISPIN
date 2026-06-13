@@ -5,6 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        bangers: ['Bangers', 'cursive'],
+        nunito: ['Nunito', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
@@ -22,7 +24,10 @@ module.exports = {
           DEFAULT: '#FFC83D',
           light: '#FFE082',
         },
-        negro: '#111111',
+        negro: '#080012',
+        'deep-purple': '#080012',
+        'purple-mid': '#1E0650',
+        'purple-card': 'rgba(74,14,143,0.15)',
         gris: {
           oscuro: '#1A1A2E',
           medio: '#2D2D44',
