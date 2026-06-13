@@ -1,133 +1,83 @@
-import { useRef, useEffect } from 'react';
-import { useReservation } from '@/context/ReservationContext';
+import { Flame } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { useReservation } from '@/context/ReservationContext';
 
 export function FinalCTASection() {
   const { openClawMachine } = useReservation();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Fireworks animation
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    interface Firework {
-      x: number;
-      y: number;
-      particles: { vx: number; vy: number; alpha: number; color: string; size: number }[];
-      alive: boolean;
-    }
-
-    const fireworks: Firework[] = [];
-    const colors = ['#6B2FB8', '#FF7A00', '#FFC83D', '#FF6B9D', '#8B5CF6'];
-
-    const createFirework = () => {
-      const x = 100 + Math.random() * (canvas.offsetWidth - 200);
-      const y = 50 + Math.random() * (canvas.offsetHeight * 0.4);
-      const particleCount = 20 + Math.floor(Math.random() * 20);
-      
-      const particles = Array.from({ length: particleCount }, () => ({
-        vx: (Math.random() - 0.5) * 6,
-        vy: (Math.random() - 0.5) * 6,
-        alpha: 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: Math.random() * 3 + 1,
-      }));
-      
-      fireworks.push({ x, y, particles, alive: true });
-    };
-
-    let frame = 0;
-    const animate = () => {
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      ctx.clearRect(0, 0, w, h);
-
-      // Create new firework occasionally
-      frame++;
-      if (frame % 120 === 0) createFirework();
-
-      fireworks.forEach(fw => {
-        fw.particles.forEach(p => {
-          p.vx *= 0.98;
-          p.vy *= 0.98;
-          p.vy += 0.02; // gravity
-          p.alpha -= 0.008;
-          
-          fw.x += p.vx;
-          fw.y += p.vy;
-          
-          if (p.alpha > 0) {
-            ctx.beginPath();
-            ctx.arc(fw.x, fw.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.globalAlpha = Math.max(p.alpha, 0);
-            ctx.fill();
-          }
-        });
-        
-        fw.alive = fw.particles.some(p => p.alpha > 0);
-      });
-
-      // Remove dead fireworks
-      for (let i = fireworks.length - 1; i >= 0; i--) {
-        if (!fireworks[i].alive) fireworks.splice(i, 1);
-      }
-
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-    return () => window.removeEventListener('resize', resize);
-  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-sunset">
-      {/* Fireworks canvas */}
-      <canvas 
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none"
-      />
+    <section className="relative overflow-hidden" 
+      style={{ background: 'linear-gradient(135deg, #1A0040 0%, #080012 100%)' }}>
       
-      <div className="container-custom relative z-10 text-center py-20">
-        <ScrollReveal>
-          <h2 className="font-poppins font-black text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-tight">
-            Las fiestas terminan.<br />
-            <span className="text-gradient-fire">Los recuerdos no.</span>
-          </h2>
-        </ScrollReveal>
-        
-        <ScrollReveal delay={0.15}>
-          <p className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-10 leading-relaxed">
-            Rescata tu Chispín y forma parte de la primera generación que mantiene viva la chispa.
-          </p>
-        </ScrollReveal>
-        
-        <ScrollReveal delay={0.25}>
-          <button 
-            onClick={openClawMachine}
-            className="btn-primary text-xl px-16 py-6 animate-pulse-glow"
-          >
-            QUIERO RESCATAR MI CHISPÍN
-          </button>
-        </ScrollReveal>
-        
-        <ScrollReveal delay={0.35}>
-          <div className="mt-12 flex items-center justify-center gap-2 text-white/40 text-sm">
-            <span>© 2024 Chispín. La Chispa Nunca Se Apaga.</span>
-          </div>
-        </ScrollReveal>
+      {/* Top fire separator line */}
+      <div className="absolute top-0 left-0 right-0 h-1"
+        style={{ background: 'linear-gradient(90deg, transparent, #FF6B00, #FFB800, #FF6B00, transparent)' }} />
+
+      <div className="container-custom relative z-10 py-16 md:py-24">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
+          
+          {/* LEFT: Image */}
+          <ScrollReveal className="lg:col-span-4 hidden lg:block">
+            <div className="relative flex justify-center -mb-24">
+              <img 
+                src="/images/chispin-hero.png" 
+                alt="Chispín"
+                className="w-80 h-80 object-contain animate-float drop-shadow-2xl"
+              />
+            </div>
+          </ScrollReveal>
+
+          {/* CENTER: Text & CTA */}
+          <ScrollReveal delay={0.1} className="lg:col-span-8 text-center lg:text-left flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            
+            <div className="flex-1">
+              <h2 className="font-bangers text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-none">
+                LAS FIESTAS TERMINAN.<br/>
+                <span style={{ 
+                  background: 'linear-gradient(135deg,#FFB800,#FF6B00)', 
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' 
+                }}>
+                  LOS RECUERDOS NO.
+                </span>
+              </h2>
+              <p className="text-white/70 font-nunito text-base md:text-lg mb-8 max-w-xl mx-auto lg:mx-0">
+                Rescata tu Chispín y forma parte de la primera generación.
+              </p>
+              
+              <button onClick={openClawMachine} 
+                className="btn-primary text-base px-10 py-5 w-full sm:w-auto animate-pulse-glow">
+                QUIERO RESCATAR MI CHISPÍN <Flame className="w-5 h-5 ml-2 inline-block" />
+              </button>
+            </div>
+
+            {/* RIGHT: Founder Badge */}
+            <div className="shrink-0 relative">
+              {/* Spinning glow */}
+              <div className="absolute inset-0 rounded-full animate-spin-slow opacity-50"
+                style={{ 
+                  background: 'conic-gradient(from 0deg, transparent, rgba(255,184,0,0.8), transparent)',
+                  animation: 'spin 4s linear infinite'
+                }} />
+                
+              <div className="relative w-40 h-40 rounded-full flex flex-col items-center justify-center p-4 text-center border-4"
+                style={{ 
+                  background: 'linear-gradient(135deg, #4A0E8F, #1A0040)',
+                  borderColor: '#FFB800',
+                  boxShadow: '0 0 30px rgba(255,184,0,0.4)'
+                }}>
+                <span className="font-bangers text-[#FFB800] text-2xl tracking-wider leading-none mb-1">
+                  EDICIÓN<br/>FUNDADORES
+                </span>
+                <div className="w-12 h-0.5 bg-[#FF6B00] my-2" />
+                <span className="text-white/60 font-nunito font-bold text-[9px] uppercase tracking-wider leading-tight">
+                  SOLO HASTA<br/>AGOTAR LAS PRIMERAS<br/>10.000 UNIDADES
+                </span>
+              </div>
+            </div>
+
+          </ScrollReveal>
+
+        </div>
       </div>
     </section>
   );

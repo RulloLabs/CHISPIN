@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Gamepad2, Download, CheckCircle2 } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { useReservation } from '@/context/ReservationContext';
@@ -12,7 +11,6 @@ const steps = [
 
 export function MaquinaSection() {
   const { openClawMachine, founderNumber } = useReservation();
-  const [showSuccess] = useState(false);
 
   const displayNumber = founderNumber ?? 247;
 

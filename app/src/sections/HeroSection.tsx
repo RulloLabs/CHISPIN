@@ -10,8 +10,7 @@ const trustBadges = [
 ];
 
 export function HeroSection() {
-  const { openClawMachine, reservationCount } = useReservation();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { openClawMachine } = useReservation();
   const textRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const badgesRef = useRef<HTMLDivElement>(null);

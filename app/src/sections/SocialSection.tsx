@@ -1,62 +1,78 @@
-import { SectionLabel } from '@/components/SectionLabel';
+import { Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { Instagram } from 'lucide-react';
 
-const posts = [
-  { user: 'maria_fiestas', caption: 'Mi Chispín ya tiene su lugar en la peña! 🔥', color: 'from-morado/30 to-fuego/20' },
-  { user: 'juanito_verbena', caption: 'La tradición nunca muere #LaChispaNuncaSeApaga', color: 'from-fuego/20 to-chispa/20' },
-  { user: 'las_tradiciones', caption: 'Desde Teruel con amor. Chispín es de todos.', color: 'from-chispa/20 to-morado/30' },
-  { user: 'peña_los_amigos', caption: 'Nuestro mascota oficial de las fiestas', color: 'from-rosa/20 to-morado/20' },
-  { user: 'pueblo_vivo', caption: 'Las generaciones cambian, la chispa sigue', color: 'from-morado/20 to-rosa/20' },
-  { user: 'festejos2024', caption: 'El mejor recuerdo de un verano inolvidable', color: 'from-fuego/30 to-chispa/10' },
+const photos = [
+  '/images/social-1.jpg',
+  '/images/social-2.jpg',
+  '/images/social-3.jpg',
+  '/images/social-4.jpg',
 ];
 
 export function SocialSection() {
   return (
-    <section className="relative section-padding bg-negro">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <ScrollReveal>
-            <SectionLabel text="Comunidad" />
-            <h2 className="font-poppins font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-              #LaChispaNuncaSeApaga
-            </h2>
-            <p className="text-white/60 max-w-md mx-auto">
-              Así viven la experiencia los miembros de la manada
-            </p>
-          </ScrollReveal>
-        </div>
-        
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {posts.map((post, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="group relative rounded-2xl overflow-hidden bg-gradient-to-br aspect-square flex flex-col justify-end p-4 cursor-pointer hover:-translate-y-1 transition-all duration-300">
-                {/* Background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${post.color}`} />
-                
-                {/* Chispin image centered */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity">
-                  <img 
-                    src="/images/chispin-front.png" 
-                    alt="" 
-                    className="w-24 h-24 object-contain"
-                  />
-                </div>
-                
-                {/* Content */}
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Instagram className="w-4 h-4 text-white/60" />
-                    <span className="text-white/80 text-xs font-medium">@{post.user}</span>
+    <section id="social" className="relative section-padding overflow-hidden"
+      style={{ background: '#080012' }}>
+
+      <div className="container-custom relative z-10">
+        <ScrollReveal>
+          <div className="section-label">La Chispa Nunca Se Apaga</div>
+          <h2 className="font-bangers text-4xl md:text-5xl lg:text-6xl text-white mb-2 leading-tight">
+            COMPARTE TU CHISPÍN<br />CON EL MUNDO
+          </h2>
+          <p className="text-[#FF6B00] font-nunito font-bold text-lg md:text-xl mb-10">
+            #LaChispaNuncaSeApaga
+          </p>
+        </ScrollReveal>
+
+        <div className="flex flex-col lg:flex-row gap-10 items-center">
+
+          {/* LEFT: Photo Grid/Carousel */}
+          <ScrollReveal className="w-full lg:w-2/3">
+            <div className="flex items-center gap-4">
+              <button className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 shrink-0">
+                <ChevronLeft className="w-5 h-5 text-white" />
+              </button>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1">
+                {photos.map((src, i) => (
+                  <div key={i} className="aspect-square rounded-2xl overflow-hidden group">
+                    <img
+                      src={src}
+                      alt="Chispín en el mundo"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <p className="text-white/60 text-xs leading-relaxed line-clamp-2">
-                    {post.caption}
-                  </p>
-                </div>
+                ))}
               </div>
-            </ScrollReveal>
-          ))}
+
+              <button className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 shrink-0">
+                <ChevronRight className="w-5 h-5 text-white" />
+              </button>
+            </div>
+          </ScrollReveal>
+
+          {/* RIGHT: Floating Chispín + CTA */}
+          <ScrollReveal delay={0.15} className="w-full lg:w-1/3 flex flex-col items-center">
+            <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6">
+              {/* Glow */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-full h-full rounded-full"
+                  style={{ background: 'radial-gradient(circle, rgba(123,47,190,0.3) 0%, transparent 70%)' }} />
+              </div>
+              <img
+                src="/images/chispin-box.png"
+                alt="Chispín en su caja"
+                className="relative w-full h-full object-contain animate-float drop-shadow-2xl"
+              />
+            </div>
+
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+              className="btn-secondary text-xs px-8 py-4 flex items-center gap-2 w-full max-w-[280px]">
+              <Instagram className="w-4 h-4" />
+              VER MÁS EN INSTAGRAM
+            </a>
+          </ScrollReveal>
+
         </div>
       </div>
     </section>
