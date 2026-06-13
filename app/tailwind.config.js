@@ -72,9 +72,11 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        'glow-morado': '0 0 60px rgba(107, 47, 184, 0.3)',
-        'glow-fuego': '0 0 40px rgba(255, 122, 0, 0.4)',
-        'glow-chispa': '0 0 50px rgba(255, 200, 61, 0.3)',
+        glow: {
+          morado: '0 0 60px rgba(107, 47, 184, 0.3)',
+          fuego: '0 0 40px rgba(255, 122, 0, 0.4)',
+          chispa: '0 0 50px rgba(255, 200, 61, 0.3)',
+        },
       },
       keyframes: {
         "accordion-down": {
@@ -108,10 +110,6 @@ module.exports = {
           "90%": { opacity: "1" },
           "100%": { transform: "translateY(-10vh) scale(1)", opacity: "0" },
         },
-        "wiggle": {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -120,7 +118,6 @@ module.exports = {
         "float": "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "arcade-light": "arcade-light 1.5s linear infinite",
-        "wiggle": "wiggle 4s ease-in-out infinite",
       },
     },
   },

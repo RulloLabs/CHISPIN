@@ -32,7 +32,7 @@ export function ReservationProvider({ children }: { children: React.ReactNode })
   }, []);
 
   const completeReservation = useCallback((_name: string, _email: string) => {
-    const num = Math.floor(Math.random() * 500) + 1;
+    const num = Math.floor(Math.random() * 5000) + 1;
     setFounderNumber(num);
     setReservationCount(prev => prev + 1);
   }, []);

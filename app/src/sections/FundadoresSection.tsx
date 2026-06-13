@@ -24,8 +24,8 @@ const benefits = [
 
 export function FundadoresSection() {
   const { reservationCount, openClawMachine } = useReservation();
-  const progress = Math.min((reservationCount / 500) * 100, 100);
-  const remaining = Math.max(500 - reservationCount, 0);
+  const progress = Math.min((reservationCount / 5000) * 100, 100);
+  const remaining = Math.max(5000 - reservationCount, 0);
 
   return (
     <section id="fundadores" className="relative section-padding gradient-purple">
@@ -38,7 +38,7 @@ export function FundadoresSection() {
               Sé Fundador de la Manada
             </h2>
             <p className="text-lg text-white/80 leading-relaxed">
-              Solo las primeras 500 reservas recibirán el estatus de Fundador con beneficios exclusivos para siempre.
+              Solo las primeras 5.000 reservas recibirán el estatus de Fundador con beneficios exclusivos para siempre.
             </p>
           </ScrollReveal>
         </div>
@@ -101,7 +101,7 @@ export function FundadoresSection() {
                 <span className="text-white/60">
                   <CountUp end={reservationCount} duration={2} separator="." /> reservas
                 </span>
-                <span className="text-chispa font-bold">500 máx.</span>
+                <span className="text-chispa font-bold">5.000 máx.</span>
               </div>
               
               <div className="h-4 bg-white/10 rounded-full overflow-hidden mb-3">

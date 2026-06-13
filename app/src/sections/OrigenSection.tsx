@@ -1,82 +1,54 @@
+import { SectionLabel } from '@/components/SectionLabel';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { Heart, Home, Music, Users, Star } from 'lucide-react';
 
 export function OrigenSection() {
   return (
-    <section id="origen" className="relative section-padding bg-gradient-to-b from-negro to-[#1a1025]">
+    <section id="origen" className="relative section-padding bg-negro">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Image */}
+          <ScrollReveal className="order-2 lg:order-1">
+            <div className="relative rounded-3xl overflow-hidden">
+              <img 
+                src="/images/village-scene.jpg" 
+                alt="Pueblo de montaña español de fiesta"
+                className="w-full h-[300px] md:h-[400px] object-cover rounded-3xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-negro/60 to-transparent" />
+              
+              {/* Quote overlay */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="flex items-start gap-3">
+                  <div className="w-1 h-16 gradient-fire rounded-full shrink-0" />
+                  <p className="font-poppins font-bold text-xl md:text-2xl text-chispa italic">
+                    "La chispa nunca se apaga."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
           
-          {/* Text Content */}
-          <div className="order-2 lg:order-1">
+          {/* Text */}
+          <div className="order-1 lg:order-2">
             <ScrollReveal>
-              <h2 className="font-poppins font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6 uppercase italic">
-                <span className="text-gradient-purple">¿QUIÉN ES</span> <span className="text-white">CHISPÍN?</span>
+              <SectionLabel text="Su Historia" />
+              <h2 className="font-poppins font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-6">
+                ¿Quién es Chispín?
               </h2>
             </ScrollReveal>
             
             <ScrollReveal delay={0.15}>
-              <p className="text-lg text-white/90 leading-relaxed mb-6 font-medium">
-                Chispín nació de una pequeña chispa perdida durante una noche de fiesta en un pueblo de montaña.
+              <p className="text-lg text-white/75 leading-relaxed mb-4">
+                Chispín nació de una pequeña chispa perdida durante una noche de fiesta en un pueblo de montaña. Mientras las luces de la verbena parpadeaban y la risa de los amigos llenaba la plaza, esa chispa cobró vida.
               </p>
             </ScrollReveal>
             
             <ScrollReveal delay={0.25}>
-              <p className="text-base text-white/80 leading-relaxed mb-12">
-                Desde entonces, recorre pueblos y ciudades manteniendo viva la alegría, las tradiciones y las amistades que nos unen.
+              <p className="text-base text-white/60 leading-relaxed">
+                Desde entonces recorre pueblos y ciudades manteniendo viva la alegría y las tradiciones que nos unen. No pertenece a ninguna peña concreta... pertenece a todos los que creen en la magia de las fiestas.
               </p>
             </ScrollReveal>
-
-            {/* Icons row */}
-            <ScrollReveal delay={0.35}>
-              <div className="grid grid-cols-5 gap-4">
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center mb-3 group-hover:border-chispa group-hover:bg-chispa/10 transition-colors">
-                    <Heart className="w-6 h-6 text-white group-hover:text-chispa transition-colors" />
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/80 group-hover:text-white transition-colors">AMISTAD</span>
-                </div>
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center mb-3 group-hover:border-chispa group-hover:bg-chispa/10 transition-colors">
-                    <Home className="w-6 h-6 text-white group-hover:text-chispa transition-colors" />
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/80 group-hover:text-white transition-colors">TRADICIÓN</span>
-                </div>
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center mb-3 group-hover:border-chispa group-hover:bg-chispa/10 transition-colors">
-                    <Music className="w-6 h-6 text-white group-hover:text-chispa transition-colors" />
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/80 group-hover:text-white transition-colors">DIVERSIÓN</span>
-                </div>
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center mb-3 group-hover:border-chispa group-hover:bg-chispa/10 transition-colors">
-                    <Users className="w-6 h-6 text-white group-hover:text-chispa transition-colors" />
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/80 group-hover:text-white transition-colors">UNIÓN</span>
-                </div>
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center mb-3 group-hover:border-chispa group-hover:bg-chispa/10 transition-colors">
-                    <Star className="w-6 h-6 text-white group-hover:text-chispa transition-colors" />
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/80 group-hover:text-white transition-colors">ALEGRÍA</span>
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
-
-          {/* Image */}
-          <ScrollReveal className="order-1 lg:order-2">
-            <div className="relative rounded-3xl overflow-hidden flex justify-center items-center">
-              {/* Glow background */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-chispa/20 to-purple-600/20 rounded-full blur-3xl opacity-50" />
-              <img 
-                src="/images/village-scene.png" 
-                alt="Chispín de espaldas mirando los fuegos artificiales"
-                className="relative z-10 w-full max-w-[500px] h-auto rounded-3xl drop-shadow-[0_0_35px_rgba(255,122,0,0.25)] hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          </ScrollReveal>
-
         </div>
       </div>
     </section>

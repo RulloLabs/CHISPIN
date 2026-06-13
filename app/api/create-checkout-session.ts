@@ -1,8 +1,25 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import Stripe from 'stripe';
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2025-05-28.basil',
+});
+
+const APP_URL =
+  process.env.VITE_APP_URL ||
+  process.env.NEXT_PUBLIC_URL ||
+  'https://chispin.vercel.app';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', APP_URL);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -18,16 +35,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       mode: 'payment',
       payment_method_types: ['card'],
       customer_email: email,
+      locale: 'es',
       line_items: [
         {
           price_data: {
             currency: 'eur',
             product_data: {
-              name: 'Chispín - Edición Fundadores',
-              description: 'Unidad exclusiva de la primera generación de Chispín',
-              images: [`${process.env.NEXT_PUBLIC_URL || 'https://app-blue-theta-23.vercel.app'}/images/chispin-hero.png`],
+              name: 'Chispín — Edición Fundadores',
+              description: 'Unidad exclusiva numerada de la primera generación. Envío garantizado.',
+              images: [`${APP_URL}/images/chispin-hero.png`],
             },
-            unit_amount: 3900,
+            unit_amount: 3900, // €39.00
           },
           quantity: 1,
         },
@@ -35,14 +53,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       metadata: {
         name: name || '',
         email,
+        edition: 'fundadores',
       },
-      success_url: `${process.env.NEXT_PUBLIC_URL || 'https://app-blue-theta-23.vercel.app'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_URL || 'https://app-blue-theta-23.vercel.app'}/`,
+      success_url: `${APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${APP_URL}/`,
     });
 
     return res.status(200).json({ url: session.url });
   } catch (err: any) {
-    console.error('Stripe error:', err);
+    console.error('[Stripe] create-checkout-session error:', err);
     return res.status(500).json({ error: err.message });
   }
 }

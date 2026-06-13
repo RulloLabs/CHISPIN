@@ -1,91 +1,62 @@
+import { SectionLabel } from '@/components/SectionLabel';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 
-const instagramPhotos = [
-  { id: 1, path: '/images/ChatGPT Image 10 jun 2026, 13_29_24.png' },
-  { id: 2, path: '/images/ChatGPT Image 10 jun 2026, 13_29_27.png' },
-  { id: 3, path: '/images/ChatGPT Image 10 jun 2026, 13_29_31.png' },
-  { id: 4, path: '/images/ChatGPT Image 10 jun 2026, 13_29_37.png' },
+const posts = [
+  { user: 'maria_fiestas', caption: 'Mi Chispín ya tiene su lugar en la peña! 🔥', color: 'from-morado/30 to-fuego/20' },
+  { user: 'juanito_verbena', caption: 'La tradición nunca muere #LaChispaNuncaSeApaga', color: 'from-fuego/20 to-chispa/20' },
+  { user: 'las_tradiciones', caption: 'Desde Teruel con amor. Chispín es de todos.', color: 'from-chispa/20 to-morado/30' },
+  { user: 'peña_los_amigos', caption: 'Nuestro mascota oficial de las fiestas', color: 'from-rosa/20 to-morado/20' },
+  { user: 'pueblo_vivo', caption: 'Las generaciones cambian, la chispa sigue', color: 'from-morado/20 to-rosa/20' },
+  { user: 'festejos2024', caption: 'El mejor recuerdo de un verano inolvidable', color: 'from-fuego/30 to-chispa/10' },
 ];
 
 export function SocialSection() {
   return (
-    <section className="relative section-padding bg-[#f7f5f0] py-20 border-t border-black/5">
+    <section className="relative section-padding bg-negro">
       <div className="container-custom">
-        
-        {/* Header */}
-        <ScrollReveal>
-          <div className="mb-12 text-center lg:text-left">
-            <h2 className="font-poppins font-black text-4xl md:text-5xl text-[#3d2c5e] uppercase italic mb-2 tracking-wide">
-              LA CHISPA NUNCA SE APAGA
+        <div className="text-center mb-12">
+          <ScrollReveal>
+            <SectionLabel text="Comunidad" />
+            <h2 className="font-poppins font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
+              #LaChispaNuncaSeApaga
             </h2>
-            <p className="text-[#3d2c5e]/70 text-sm md:text-base font-semibold">
-              Comparte tu Chispín con el mundo <span className="text-[#ff7a00]">#LaChispaNuncaSeApaga</span>
+            <p className="text-white/60 max-w-md mx-auto">
+              Así viven la experiencia los miembros de la manada
             </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Left/Center: Photo carousel row (lg:col-span-9) */}
-          <div className="lg:col-span-9 relative flex items-center">
-            {/* Left navigation arrow */}
-            <button 
-              className="absolute -left-4 z-20 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-[#3d2c5e] border border-black/5 hover:scale-105 transition-transform"
-              aria-label="Previous photo"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            {/* Photos Grid */}
-            <div className="w-full overflow-hidden px-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {instagramPhotos.map((photo) => (
-                  <div 
-                    key={photo.id}
-                    className="rounded-2xl overflow-hidden aspect-square bg-white shadow-md border border-black/5 transition-transform hover:scale-[1.02] duration-300"
-                  >
-                    <img 
-                      src={photo.path} 
-                      alt={`Chispín en Instagram ${photo.id}`} 
-                      className="w-full h-full object-cover"
-                    />
+          </ScrollReveal>
+        </div>
+        
+        {/* Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {posts.map((post, i) => (
+            <ScrollReveal key={i} delay={i * 0.1}>
+              <div className="group relative rounded-2xl overflow-hidden bg-gradient-to-br aspect-square flex flex-col justify-end p-4 cursor-pointer hover:-translate-y-1 transition-all duration-300">
+                {/* Background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${post.color}`} />
+                
+                {/* Chispin image centered */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity">
+                  <img 
+                    src="/images/chispin-front.png" 
+                    alt="" 
+                    className="w-24 h-24 object-contain"
+                  />
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Instagram className="w-4 h-4 text-white/60" />
+                    <span className="text-white/80 text-xs font-medium">@{post.user}</span>
                   </div>
-                ))}
+                  <p className="text-white/60 text-xs leading-relaxed line-clamp-2">
+                    {post.caption}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            {/* Right navigation arrow */}
-            <button 
-              className="absolute -right-4 z-20 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-[#3d2c5e] border border-black/5 hover:scale-105 transition-transform"
-              aria-label="Next photo"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Right Column: Chispín in shipping box & Instagram button (lg:col-span-3) */}
-          <div className="lg:col-span-3 flex flex-col items-center text-center">
-            <div className="relative w-full max-w-[200px] mb-4">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#ff7a00]/10 to-purple-600/10 rounded-full blur-2xl opacity-50" />
-              <img 
-                src="/images/chispin-box.png" 
-                alt="Chispín en caja"
-                className="relative z-10 w-full h-auto drop-shadow-xl hover:-translate-y-1 transition-transform duration-300"
-              />
-            </div>
-            
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#8a3ab9] hover:bg-[#722b9c] text-white font-poppins font-black text-xs py-3.5 px-6 rounded-xl uppercase tracking-wider transition-all shadow-md active:scale-95 w-full"
-            >
-              <Instagram className="w-4 h-4" />
-              VER MÁS EN INSTAGRAM
-            </a>
-          </div>
-
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>
