@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#080012">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Chispín — Rescata tu peluche edición fundadores. La chispa nunca se apaga.">
+<title>Chispín — La Chispa Nunca Se Apaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   RESET & TOKENS
+══════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --pur:#4A0E8F;--purd:#2D0A5C;--purl:#7B2FBE;
+  --gold:#FFB800;--ora:#FF6B00;--fire:#FF4D00;
+  --bg:#080012;--glass:rgba(74,14,143,.15);
+  --r:clamp(1rem,4vw,1.4rem); /* base font */
+}
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ══════════════════════════════════════════
+   PHASE SYSTEM
+══════════════════════════════════════════ */
+.ph{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .45s ease;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+.ph.off{opacity:0;pointer-events:none;}
+
+/* ══════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════ */
+.btn{
+  background:linear-gradient(135deg,var(--gold),var(--ora));
+  color:#1A0040;border:none;
+  padding:.85rem 2.2rem;border-radius:50px;
+  font-size:clamp(.95rem,3.5vw,1.15rem);
+  font-weight:900;font-family:'Nunito',sans-serif;
+  cursor:pointer;text-transform:uppercase;letter-spacing:.04em;
+  box-shadow:0 0 28px rgba(255,184,0,.4);
+  transition:transform .12s,box-shadow .12s;
+  width:100%;max-width:320px;
+  touch-action:manipulation;
+}
+.btn:active{transform:scale(.94);box-shadow:0 0 12px rgba(255,184,0,.3);}
+.btn:disabled{opacity:.35;pointer-events:none;}
+.btn-sec{
+  background:linear-gradient(135deg,var(--purl),var(--pur));
+  color:#fff;border:none;
+  padding:.75rem 2rem;border-radius:50px;
+  font-size:clamp(.85rem,3vw,1rem);
+  font-weight:900;font-family:'Nunito',sans-serif;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(123,47,190,.35);
+  width:100%;max-width:320px;
+  touch-action:manipulation;
+  transition:transform .12s;
+}
+.btn-sec:active{transform:scale(.94);}
+
+/* ══════════════════════════════════════════
+   LOADING SCREEN
+══════════════════════════════════════════ */
+#p-load{
+  background:var(--bg);z-index:999;
+  gap:1.2rem;
+}
+.load-logo{
+  font-family:'Bangers',cursive;
+  font-size:clamp(3.5rem,12vw,6rem);
+  color:var(--gold);
+  text-shadow:4px 4px 0 var(--ora),0 0 60px rgba(255,184,0,.4);
+  letter-spacing:.05em;
+}
+.load-sub{color:#C8A5FF;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;}
+.load-bar-wrap{width:min(220px,60vw);height:5px;background:rgba(255,184,0,.15);border-radius:3px;overflow:hidden;}
+.load-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--ora));border-radius:3px;transition:width .25s;}
+.load-txt{color:#C8A5FF;font-size:.75rem;letter-spacing:.05em;}
+
+/* ══════════════════════════════════════════
+   INTRO
+══════════════════════════════════════════ */
+#p-intro{background:radial-gradient(ellipse at 50% 35%,#1E0650 0%,var(--bg) 70%);}
+#spark-c{position:absolute;inset:0;pointer-events:none;}
+.intro-inner{
+  text-align:center;z-index:2;
+  padding:2rem 1.5rem;
+  max-width:480px;width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+.logo{
+  font-family:'Bangers',cursive;
+  font-size:clamp(4rem,14vw,7rem);
+  color:var(--gold);
+  letter-spacing:.06em;
+  text-shadow:4px 4px 0 var(--ora),0 0 60px rgba(255,184,0,.5);
+  line-height:.9;
+}
+.tagline{color:#C8A5FF;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;}
+.intro-text{
+  font-size:clamp(1rem,3.5vw,1.2rem);
+  color:#C8A5FF;line-height:1.85;
+  margin:.5rem 0;
+}
+.intro-text strong{color:var(--gold);}
+
+/* Model selector */
+.model-label{color:rgba(200,165,255,.55);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem;}
+.model-selector{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:.5rem;}
+.model-btn{
+  background:rgba(74,14,143,.4);
+  border:1.5px solid rgba(255,184,0,.25);
+  color:#C8A5FF;
+  padding:.45rem .9rem;border-radius:10px;
+  font-size:.75rem;font-weight:700;
+  cursor:pointer;font-family:'Nunito',sans-serif;
+  transition:all .18s;touch-action:manipulation;
+}
+.model-btn.active,.model-btn:active{
+  background:rgba(123,47,190,.65);
+  border-color:var(--gold);color:var(--gold);
+}
+
+/* ══════════════════════════════════════════
+   MACHINE PHASE
+══════════════════════════════════════════ */
+#p-machine{padding:0;background:var(--bg);}
+#cv-wrap{position:absolute;inset:0;}
+#cv{width:100%!important;height:100%!important;display:block;touch-action:none;}
+
+/* HUD */
+.hud{position:absolute;inset:0;pointer-events:none;z-index:10;}
+
+/* Top bar */
+.hud-top{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:env(safe-area-inset-top,.5rem) .75rem .5rem;
+  gap:.4rem;
+}
+.hud-logo{
+  font-family:'Bangers',cursive;
+  font-size:clamp(1.4rem,5vw,2rem);
+  color:var(--gold);text-shadow:2px 2px 0 var(--ora);
+  letter-spacing:.05em;line-height:1;
+}
+.hud-right{display:flex;gap:.4rem;align-items:flex-start;flex-wrap:wrap;justify-content:flex-end;}
+.badge{
+  background:rgba(8,0,18,.82);
+  border:1.5px solid rgba(255,184,0,.45);
+  border-radius:10px;padding:.3rem .55rem;
+  font-size:.7rem;font-weight:700;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  text-align:center;color:var(--gold);line-height:1.3;
+}
+.badge small{display:block;color:rgba(200,165,255,.6);font-size:.55rem;font-weight:400;letter-spacing:.04em;}
+.badge .big{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:.05em;line-height:1;}
+
+/* Timer */
+#timer-badge{display:none;}
+#timer-num{
+  font-family:'Bangers',cursive;font-size:1.3rem;
+  color:var(--gold);line-height:1;
+  transition:color .3s;
+}
+#timer-num.urgent{color:var(--fire);animation:pulse .5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* Attempts */
+.dots{display:flex;gap:.3rem;justify-content:center;margin-top:.2rem;}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 7px var(--gold);transition:all .3s;}
+.dot.used{background:rgba(255,184,0,.15);box-shadow:none;}
+
+/* Bottom controls */
+.hud-bot{
+  position:absolute;bottom:0;left:0;right:0;
+  pointer-events:all;
+  padding:.6rem .75rem calc(env(safe-area-inset-bottom,.5rem) + .5rem);
+  display:flex;flex-direction:column;align-items:center;gap:.55rem;
+}
+
+/* Camera buttons */
+.cam-row{display:flex;gap:.4rem;}
+.cam-btn{
+  background:rgba(8,0,18,.8);
+  border:1.5px solid rgba(255,184,0,.3);
+  color:var(--gold);padding:.38rem .8rem;border-radius:8px;
+  font-size:.7rem;font-weight:700;
+  cursor:pointer;font-family:'Nunito',sans-serif;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:all .18s;touch-action:manipulation;
+  pointer-events:all;
+}
+.cam-btn.active,.cam-btn:active{
+  background:rgba(123,47,190,.75);border-color:var(--gold);
+}
+
+/* Joystick + catch row */
+.ctrl-row{display:flex;align-items:center;gap:.75rem;flex-wrap:nowrap;}
+
+/* Joystick */
+.joy-pad{
+  position:relative;
+  width:clamp(88px,22vw,110px);
+  height:clamp(88px,22vw,110px);
+  background:rgba(15,0,45,.8);
+  border:1.5px solid rgba(255,184,0,.2);
+  border-radius:50%;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  flex-shrink:0;
+}
+.joy{
+  position:absolute;
+  width:32px;height:32px;
+  background:linear-gradient(135deg,var(--purl),var(--pur));
+  border:none;border-radius:50%;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:.9rem;
+  pointer-events:all;
+  transition:transform .1s,filter .1s;
+  touch-action:manipulation;
+  user-select:none;-webkit-user-select:none;
+}
+.joy:active,.joy.pressed{transform:scale(.8)!important;filter:brightness(1.5);}
+.j-u{top:2px;left:50%;transform:translateX(-50%);}
+.j-d{bottom:2px;left:50%;transform:translateX(-50%);}
+.j-l{left:2px;top:50%;transform:translateY(-50%);}
+.j-r{right:2px;top:50%;transform:translateY(-50%);}
+
+/* Catch column */
+.catch-col{display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+.pos-ind{
+  background:rgba(8,0,18,.8);
+  border:1px solid rgba(255,184,0,.2);
+  border-radius:6px;padding:.25rem .55rem;
+  color:#C8A5FF;font-size:.65rem;
+  backdrop-filter:blur(6px);
+}
+.pos-ind span{color:var(--gold);font-weight:800;}
+.btn-catch{
+  background:linear-gradient(135deg,var(--fire),var(--ora));
+  color:#fff;border:none;
+  padding:.75rem 1.6rem;border-radius:50px;
+  font-size:clamp(.85rem,3.5vw,1rem);
+  font-weight:900;font-family:'Nunito',sans-serif;
+  cursor:pointer;text-transform:uppercase;letter-spacing:.04em;
+  box-shadow:0 0 22px rgba(255,77,0,.5);
+  touch-action:manipulation;
+  transition:transform .12s,box-shadow .12s;
+  pointer-events:all;
+  white-space:nowrap;
+}
+.btn-catch:active{transform:scale(.93);box-shadow:0 0 10px rgba(255,77,0,.3);}
+.btn-catch:disabled{opacity:.3;pointer-events:none;}
+.kbd-hint{color:rgba(200,165,255,.35);font-size:.6rem;text-align:center;display:none;}
+@media(hover:hover){.kbd-hint{display:block;}}
+
+/* ══════════════════════════════════════════
+   NEAR-MISS OVERLAY
+══════════════════════════════════════════ */
+#near-miss{
+  position:fixed;inset:0;z-index:200;
+  pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+}
+#nm-txt{
+  font-family:'Bangers',cursive;
+  font-size:clamp(3rem,12vw,6rem);
+  color:var(--fire);
+  text-shadow:0 0 40px rgba(255,77,0,.8);
+  letter-spacing:.1em;
+}
+
+/* Attempt flash */
+#att-flash{
+  position:fixed;top:38%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Bangers',cursive;
+  font-size:clamp(1.8rem,6vw,3rem);
+  text-align:center;pointer-events:none;
+  opacity:0;z-index:300;line-height:1.2;
+}
+
+/* ══════════════════════════════════════════
+   VICTORY VIDEO
+══════════════════════════════════════════ */
+#victory-wrap{
+  position:fixed;inset:0;z-index:400;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.75);
+}
+#victory-video{
+  width:min(92vw,480px);
+  border-radius:14px;
+  box-shadow:0 0 60px rgba(255,184,0,.5);
+}
+
+/* ══════════════════════════════════════════
+   CELEBRATION
+══════════════════════════════════════════ */
+#p-celeb{
+  background:radial-gradient(ellipse at center,#2D0A5C,var(--bg));
+  align-items:flex-start;
+}
+#conf-c{position:fixed;inset:0;pointer-events:none;z-index:1;}
+.celeb-inner{
+  display:flex;flex-direction:column;align-items:center;
+  padding:1.5rem 1.25rem calc(env(safe-area-inset-bottom,1rem) + 1.5rem);
+  max-width:480px;width:100%;z-index:2;gap:1rem;
+}
+.rarity-b{
+  display:inline-block;
+  padding:.35rem .9rem;border-radius:50px;
+  font-size:.75rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.1em;
+  margin-top:.5rem;
+}
+.r-normal{background:rgba(74,14,143,.5);color:#C8A5FF;border:1px solid rgba(200,165,255,.3);}
+.r-festivalero{background:linear-gradient(135deg,#FF6B35,#FF0080);color:#fff;box-shadow:0 0 20px rgba(255,0,128,.4);}
+.r-dorado{background:linear-gradient(135deg,#FFB800,#FF6B00);color:#1A0040;box-shadow:0 0 30px rgba(255,184,0,.6);}
+.r-azul{background:linear-gradient(135deg,#00D4FF,#0047FF);color:#fff;box-shadow:0 0 30px rgba(0,212,255,.6);}
+
+.big-h{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2.5rem,9vw,4rem);
+  color:var(--gold);
+  text-shadow:3px 3px 0 var(--ora);
+  letter-spacing:.05em;line-height:1.1;
+  text-align:center;
+}
+.sub-h{color:#C8A5FF;font-size:.9rem;text-align:center;line-height:1.65;}
+.cert-wrap{
+  width:100%;position:relative;
+  border-radius:12px;overflow:hidden;
+  border:3px solid var(--gold);
+  box-shadow:0 0 40px rgba(255,184,0,.3);
+}
+.cert-img{width:100%;display:block;}
+.cert-over{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:1rem;
+}
+.cert-num{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2rem,8vw,3.5rem);
+  color:#7a4e00;letter-spacing:.15em;
+  text-shadow:1px 1px 0 rgba(255,200,0,.4);
+  margin-top:30%;
+}
+.cert-date-t{color:#5a3d00;font-size:.7rem;font-weight:700;margin-top:.2rem;}
+.action-btns{display:flex;flex-direction:column;gap:.6rem;width:100%;}
+
+/* ══════════════════════════════════════════
+   MAP
+══════════════════════════════════════════ */
+#p-map{
+  background:radial-gradient(ellipse at center,#1A0540,var(--bg));
+  align-items:flex-start;
+}
+.map-inner{
+  display:flex;flex-direction:column;align-items:center;
+  padding:1.5rem 1.25rem calc(env(safe-area-inset-bottom,1rem)+1.5rem);
+  max-width:520px;width:100%;z-index:2;gap:1rem;
+}
+.map-h{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2rem,7vw,3rem);
+  color:var(--gold);letter-spacing:.05em;
+  text-align:center;line-height:1.1;
+}
+.map-sub{color:#C8A5FF;text-align:center;font-size:.85rem;}
+.map-img{
+  width:100%;max-width:420px;
+  border-radius:12px;
+  box-shadow:0 0 40px rgba(74,14,143,.6);
+}
+.prov-c{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,184,0,.1);
+  border:1.5px solid var(--gold);
+  border-radius:50px;padding:.45rem 1.2rem;
+  color:var(--gold);font-weight:800;font-size:.95rem;
+}
+.top-table{width:100%;max-width:320px;}
+.top-row{
+  display:flex;align-items:center;
+  padding:.35rem .5rem;
+  border-bottom:1px solid rgba(255,184,0,.08);
+}
+.top-row:last-child{border-bottom:none;}
+.top-rank{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(74,14,143,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:800;color:var(--gold);
+  flex-shrink:0;
+}
+.top-name{flex:1;padding:0 .5rem;font-size:.82rem;color:#C8A5FF;}
+.top-num{font-weight:800;color:var(--gold);font-size:.85rem;}
+.top-row.hl .top-name{color:var(--fire);font-weight:800;}
+.top-row.hl .top-num{color:var(--fire);}
+
+/* Fireworks */
+#fw-c{position:fixed;inset:0;pointer-events:none;z-index:50;}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════ */
+@media(max-width:380px){
+  .ctrl-row{gap:.5rem;}
+  .btn-catch{padding:.65rem 1.2rem;font-size:.8rem;}
+  .joy-pad{width:82px;height:82px;}
+  .joy{width:28px;height:28px;font-size:.8rem;}
+}
+@media(min-width:768px){
+  .hud-top{padding:1rem 1.5rem .75rem;}
+  .hud-bot{padding:.8rem 1.5rem 1.2rem;}
+  .joy-pad{width:120px;height:120px;}
+  .joy{width:36px;height:36px;}
+  .btn-catch{padding:.85rem 2.2rem;font-size:1.05rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ LOADING ════════════ -->
+<div id="p-load" class="ph">
+  <div class="load-logo">CHISPÍN</div>
+  <div class="load-sub">La Chispa Nunca Se Apaga</div>
+  <div class="load-bar-wrap"><div class="load-bar" id="load-bar"></div></div>
+  <div class="load-txt" id="load-txt">Preparando la máquina...</div>
+</div>
+
+<!-- ════════════ INTRO ════════════ -->
+<div id="p-intro" class="ph off">
+  <canvas id="spark-c"></canvas>
+  <div class="intro-inner">
+    <div class="logo">CHISPÍN</div>
+    <div class="tagline">La Chispa Nunca Se Apaga</div>
+    <p class="intro-text">
+      Hace años, una chispa se perdió<br>entre fiestas, pueblos y recuerdos.<br><br>
+      Lleva años buscando a alguien como <strong>tú</strong>.
+    </p>
+    <div style="width:100%;text-align:center;">
+      <div class="model-label">Elige tu Chispín</div>
+      <div class="model-selector">
+        <button class="model-btn active" onclick="selectModel('chispin',this)">🐂 Chispín</button>
+        <button class="model-btn" onclick="selectModel('plush',this)">🧸 Plush</button>
+        <button class="model-btn" onclick="selectModel('arcade',this)">🕹️ Arcade</button>
+      </div>
+    </div>
+    <button class="btn" onclick="startGame()">🔥 Encontrar a mi Chispín</button>
+  </div>
+</div>
+
+<!-- ════════════ MACHINE ════════════ -->
+<div id="p-machine" class="ph off">
+  <div id="cv-wrap"><canvas id="cv"></canvas></div>
+  <div class="hud">
+    <!-- Top HUD -->
+    <div class="hud-top">
+      <div class="hud-logo">CHISPÍN</div>
+      <div class="hud-right">
+        <div class="badge">
+          <small>Esperando</small>
+          <div class="big" id="waiting-n">327</div>
+        </div>
+        <div class="badge">
+          <small>Intentos</small>
+          <div class="dots">
+            <div class="dot" id="d0"></div>
+            <div class="dot" id="d1"></div>
+            <div class="dot" id="d2"></div>
+          </div>
+        </div>
+        <div class="badge" id="timer-badge">
+          <small id="timer-lbl">Tiempo</small>
+          <div id="timer-num">60</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom HUD -->
+    <div class="hud-bot">
+      <div class="cam-row">
+        <button class="cam-btn active" id="cb-f" onclick="setCamera('front',this)">📷 Frontal</button>
+        <button class="cam-btn" id="cb-l" onclick="setCamera('left',this)">◀ Izquierda</button>
+        <button class="cam-btn" id="cb-r" onclick="setCamera('right',this)">▶ Derecha</button>
+      </div>
+      <div class="ctrl-row">
+        <div class="joy-pad">
+          <button class="joy j-u" onpointerdown="joyOn('u',this)" onpointerup="joyOff(this)" onpointercancel="joyOff(this)">▲</button>
+          <button class="joy j-d" onpointerdown="joyOn('d',this)" onpointerup="joyOff(this)" onpointercancel="joyOff(this)">▼</button>
+          <button class="joy j-l" onpointerdown="joyOn('l',this)" onpointerup="joyOff(this)" onpointercancel="joyOff(this)">◀</button>
+          <button class="joy j-r" onpointerdown="joyOn('r',this)" onpointerup="joyOff(this)" onpointercancel="joyOff(this)">▶</button>
+        </div>
+        <div class="catch-col">
+          <div class="pos-ind">X=<span id="px">0.0</span> Z=<span id="pz">0.0</span></div>
+          <button class="btn-catch" id="btn-catch" onclick="doCatch()">🔥 ATRAPAR</button>
+          <div class="kbd-hint">← → ↑ ↓ · ESPACIO atrapar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CELEBRATION ════════════ -->
+<div id="p-celeb" class="ph off">
+  <canvas id="conf-c"></canvas>
+  <div class="celeb-inner">
+    <div class="rarity-b r-normal" id="rarity-b">Edición Fundadores</div>
+    <div class="big-h">¡¡Chispín<br>te ha elegido!!</div>
+    <p class="sub-h">De entre todos los que podrían haberlo rescatado,<br>ha sido <strong style="color:var(--gold)">tú</strong>.</p>
+    <div class="cert-wrap">
+      <img class="cert-img" src="assets/certificate.jpg" alt="Certificado Chispín">
+      <div class="cert-over">
+        <div class="cert-num" id="cert-num">#000247</div>
+        <div class="cert-date-t" id="cert-date">12 de junio de 2026</div>
+      </div>
+    </div>
+    <div class="action-btns">
+      <button class="btn" id="btn-pay" onclick="submitPayment()" style="background:linear-gradient(135deg,#00C853,#00897B);box-shadow:0 0 28px rgba(0,200,83,.45);">🛒 Comprar Chispín — 24,90€</button>
+      <button class="btn" onclick="goMap()" style="margin-top:.2rem;">🗺️ Ver en el mapa nacional</button>
+      <button class="btn-sec" onclick="downloadCert()">📄 Descargar certificado</button>
+      <button class="btn-sec" onclick="doShare()">📱 Compartir</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ MAP ════════════ -->
+<div id="p-map" class="ph off">
+  <div class="map-inner">
+    <div class="map-h">La Manada<br>de Chispín</div>
+    <p class="map-sub">Tu Chispín ya forma parte de la manada.</p>
+    <img class="map-img" src="assets/spain-map.png" alt="Mapa España Chispín">
+    <div class="prov-c">🔥 <span id="total-n">5.843</span> Chispines rescatados</div>
+    <div class="top-table" id="top-table"></div>
+    <div class="action-btns" style="max-width:320px;">
+      <button class="btn" onclick="doShare()">📱 Compartir en redes</button>
+      <button class="btn-sec" onclick="resetGame()">🔄 Volver al inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlays -->
+<div id="near-miss"><div id="nm-txt">¡¡SE CAE!!</div></div>
+<div id="att-flash"></div>
+<canvas id="fw-c"></canvas>
+<div id="victory-wrap">
+  <video id="victory-video" autoplay muted playsinline webkit-playsinline></video>
+</div>
+
+<!-- THREE.JS (r128 from CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<!-- STRIPE -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+'use strict';
+// ════════════════════════════════════════════
+// CONFIG
+// ════════════════════════════════════════════
+const STRIPE_PK = 'pk_test_51ThmpA2OQP7HIfeWaEQ500y3d4HEuM5NqiE5GjBKnohDSzkhTBNT095AgP4Qz5NLJShYCmoeIXvwuSuPXf9BCD8O00L10GUCm0';
+const PAYMENT_LINK = ''; // ← Pega aquí tu Payment Link de Stripe (https://buy.stripe.com/test_...)
+const ATTEMPTS = 3;
+const ATTEMPT_TIMES = [60, 45, 30];
+const SUCCESS_PROB = [0.08, 0.25, 1]; // last always wins
+const CLAW_LIM = {minX:-2.2,maxX:2.2,minZ:-2.2,maxZ:2.2};
+const PROVINCES = [
+  {name:'Zaragoza',count:892},{name:'Madrid',count:741},
+  {name:'Valencia',count:612},{name:'Barcelona',count:589},
+  {name:'Teruel',count:487,hl:true},
+];
+
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let THREE_scene, THREE_camera, THREE_renderer, clawGroup;
+let chispines = [], rafId, moveIv;
+let clawPos = {x:0, z:0};
+let curCam = 'front', catching = false;
+let attemptIdx = 0, timerSec = 60, timerIv;
+let selectedModel = 'chispin';
+let glbCache = {}, modelsLoaded = false;
+let founderId, rarity;
+
+function getRarity(){
+  const r = Math.random();
+  return r<.001?'azul':r<.004?'dorado':r<.008?'festivalero':'normal';
+}
+
+// ════════════════════════════════════════════
+// PHASE MANAGEMENT
+// ════════════════════════════════════════════
+function showPhase(id){
+  document.querySelectorAll('.ph').forEach(p=>p.classList.add('off'));
+  const el = document.getElementById(id);
+  el.classList.remove('off');
+  if(el.scrollTop !== undefined) el.scrollTop = 0;
+}
+
+function selectModel(name, btn){
+  selectedModel = name;
+  document.querySelectorAll('.model-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ════════════════════════════════════════════
+// SPARK CANVAS (intro background)
+// ════════════════════════════════════════════
+function initSparks(){
+  const c = document.getElementById('spark-c');
+  const ctx = c.getContext('2d');
+  let pts = [];
+  const resize = () => { c.width=innerWidth; c.height=innerHeight; };
+  resize(); window.addEventListener('resize', resize);
+  const newPt = () => ({
+    x:Math.random()*c.width, y:Math.random()*c.height,
+    vx:(Math.random()-.5)*.7, vy:-(Math.random()*1.2+.3),
+    a:Math.random(), s:Math.random()*3+.8,
+    col:Math.random()<.5?'#FFB800':'#FF6B00'
+  });
+  for(let i=0;i<65;i++) pts.push(newPt());
+  const draw = () => {
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach((p,i)=>{
+      ctx.globalAlpha=p.a; ctx.fillStyle=p.col;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+      p.x+=p.vx; p.y+=p.vy; p.a-=.006;
+      if(p.a<=0) pts[i]=newPt();
+    });
+    ctx.globalAlpha=1;
+    if(!document.getElementById('p-intro').classList.contains('off')) requestAnimationFrame(draw);
+  };
+  draw();
+}
+
+// ════════════════════════════════════════════
+// THREE.JS SETUP
+// ════════════════════════════════════════════
+function initThree(){
+  const wrap = document.getElementById('cv-wrap');
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+
+  THREE_renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('cv'),
+    antialias: window.devicePixelRatio < 2, // disable AA on high-DPI to save perf
+    alpha: false,
+    powerPreference: 'high-performance'
+  });
+  THREE_renderer.setSize(w, h);
+  THREE_renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  THREE_renderer.shadowMap.enabled = true;
+  THREE_renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  THREE_scene = new THREE.Scene();
+  THREE_scene.background = new THREE.Color(0x080012);
+  THREE_scene.fog = new THREE.Fog(0x080012, 18, 45);
+
+  THREE_camera = new THREE.PerspectiveCamera(50, w/h, .1, 100);
+  setCamPos('front', false);
+
+  // Lights
+  THREE_scene.add(new THREE.AmbientLight(0xffffff, .45));
+  const dir = new THREE.DirectionalLight(0xffd4a0, 1.4);
+  dir.position.set(5, 12, 6);
+  dir.castShadow = true;
+  dir.shadow.mapSize.set(512, 512); // lower for mobile
+  THREE_scene.add(dir);
+  const purL = new THREE.PointLight(0x7B2FBE, 3, 16); purL.position.set(-4,5,-3); THREE_scene.add(purL);
+  const golL = new THREE.PointLight(0xFFB800, 2, 12); golL.position.set(4,3,4); THREE_scene.add(golL);
+  const firL = new THREE.PointLight(0xFF4D00, 4, 9);  firL.position.set(0,6,0); THREE_scene.add(firL);
+
+  buildBox();
+  buildClaw();
+
+  window.addEventListener('resize', ()=>{
+    const nw = wrap.clientWidth, nh = wrap.clientHeight;
+    THREE_camera.aspect = nw/nh;
+    THREE_camera.updateProjectionMatrix();
+    THREE_renderer.setSize(nw, nh);
+  });
+}
+
+function buildBox(){
+  const goldM = new THREE.MeshStandardMaterial({color:0xFFB800,metalness:.9,roughness:.1,emissive:0xFF4D00,emissiveIntensity:.12});
+  const frameM = new THREE.MeshStandardMaterial({color:0x3D0B80,metalness:.7,roughness:.3});
+  const glassM = new THREE.MeshPhysicalMaterial({color:0x9966FF,transparent:true,opacity:.09,roughness:0,transmission:.95,side:THREE.DoubleSide});
+
+  // Floor
+  const fl = new THREE.Mesh(new THREE.BoxGeometry(6,.1,6), new THREE.MeshStandardMaterial({color:0x1A0040,roughness:.7}));
+  fl.position.y=-2.55; fl.receiveShadow=true; THREE_scene.add(fl);
+
+  // Glass walls
+  [[0,0,3,0],[0,0,-3,0],[3,0,0,Math.PI/2],[-3,0,0,Math.PI/2]].forEach(([x,y,z,ry])=>{
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(6,5),glassM);
+    p.position.set(x,y,z); p.rotation.y=ry; THREE_scene.add(p);
+  });
+
+  // Corner pillars
+  [[-3,-3],[-3,3],[3,-3],[3,3]].forEach(([x,z])=>{
+    const p = new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,5,8),goldM);
+    p.position.set(x,0,z); THREE_scene.add(p);
+  });
+
+  // Top frame
+  const top = new THREE.Mesh(new THREE.BoxGeometry(6.4,.2,6.4),frameM);
+  top.position.y=2.55; THREE_scene.add(top);
+
+  // Neon strips (orange emissive)
+  const neonM = new THREE.MeshStandardMaterial({color:0xFF6B00,emissive:0xFF6B00,emissiveIntensity:4});
+  const strips=[
+    [6,.06,.06,[0,2.55,3.07]],[6,.06,.06,[0,2.55,-3.07]],
+    [.06,.06,6,[3.07,2.55,0]],[.06,.06,6,[-3.07,2.55,0]],
+    [6,.06,.06,[0,-2.5,3.07]],[6,.06,.06,[0,-2.5,-3.07]],
+  ];
+  strips.forEach(([w,h,d,pos])=>{
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d),neonM);
+    m.position.set(...pos); THREE_scene.add(m);
+  });
+
+  // Dark backdrop
+  const bgM = new THREE.MeshStandardMaterial({color:0x150030,roughness:1,emissive:0x080018,emissiveIntensity:.9});
+  const bg = new THREE.Mesh(new THREE.PlaneGeometry(5.8,4.8),bgM);
+  bg.position.set(0,0,-2.97); THREE_scene.add(bg);
+}
+
+function buildClaw(){
+  clawGroup = new THREE.Group();
+  const cableM = new THREE.MeshStandardMaterial({color:0x555555,metalness:.8,roughness:.2});
+  const cable = new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,3.5,8),cableM);
+  cable.position.y=1.75; clawGroup.add(cable);
+
+  const hubM = new THREE.MeshStandardMaterial({color:0xFFB800,metalness:.9,roughness:.1,emissive:0xFF6B00,emissiveIntensity:.4});
+  clawGroup.add(new THREE.Mesh(new THREE.SphereGeometry(.18,12,10),hubM));
+
+  const fM = new THREE.MeshStandardMaterial({color:0xFF4D00,emissive:0xFF4D00,emissiveIntensity:3,transparent:true,opacity:.9});
+  const flame = new THREE.Mesh(new THREE.ConeGeometry(.09,.25,8),fM);
+  flame.position.y=.28; clawGroup.add(flame);
+
+  const pM = new THREE.MeshStandardMaterial({color:0xAAAAAA,metalness:.9,roughness:.15});
+  [0,120,240].forEach(deg=>{
+    const rad=deg*Math.PI/180;
+    const pr = new THREE.Mesh(new THREE.CylinderGeometry(.035,.025,.55,6),pM);
+    pr.position.set(Math.sin(rad)*.22,-.28,Math.cos(rad)*.22);
+    pr.rotation.z=Math.sin(rad)*.45; pr.rotation.x=Math.cos(rad)*.45;
+    clawGroup.add(pr);
+  });
+
+  clawGroup.position.set(0,2.2,0);
+  THREE_scene.add(clawGroup);
+}
+
+// ════════════════════════════════════════════
+// GLB LOADER & MODEL PLACEMENT
+// ════════════════════════════════════════════
+function loadGLB(url){
+  return new Promise((res,rej)=>{
+    new THREE.GLTFLoader().load(
+      url, gltf=>res(gltf),
+      xhr=>{ if(xhr.lengthComputable) setLoad(Math.floor(xhr.loaded/xhr.total*50)+20,'Cargando modelo 3D...'); },
+      err=>rej(err)
+    );
+  });
+}
+
+function setLoad(pct, txt){
+  document.getElementById('load-bar').style.width = pct + '%';
+  document.getElementById('load-txt').textContent = txt;
+}
+
+async function loadAllModels(){
+  const items = [
+    {key:'chispin', url:'models/chispin.glb'},
+    {key:'plush',   url:'models/plush.glb'},
+    {key:'arcade',  url:'models/arcade.glb'},
+  ];
+  let done = 0;
+  for(const item of items){
+    try{
+      setLoad(10 + done*25, `Cargando ${item.key}...`);
+      glbCache[item.key] = await loadGLB(item.url);
+    } catch(e){ console.warn('GLB load failed:', item.key, e); }
+    done++;
+  }
+}
+
+function normalizeModel(scene, targetSize=1.15){
+  const box = new THREE.Box3().setFromObject(scene);
+  const size = new THREE.Vector3(); box.getSize(size);
+  const sc = targetSize / Math.max(size.x, size.y, size.z);
+  scene.scale.set(sc,sc,sc);
+  const center = new THREE.Vector3(); box.getCenter(center);
+  scene.position.sub(center.multiplyScalar(sc));
+  scene.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; } });
+  return scene;
+}
+
+function spawnChispines(){
+  chispines.forEach(g=>THREE_scene.remove(g));
+  chispines = [];
+
+  // Positions arranged in a 3D cluster
+  const positions = [
+    {x:-1.8,y:-1.8,z:1.8},{x:.3,y:-1.6,z:2.0},{x:2.0,y:-1.8,z:1.2},
+    {x:-.8,y:-1.8,z:.4},{x:1.2,y:-1.8,z:.3},{x:-2.0,y:-1.8,z:-.5},
+    {x:.2,y:-1.8,z:-1.1},{x:1.8,y:-1.8,z:-.7},{x:-1.3,y:-1.8,z:-1.8},
+    {x:.8,y:-1.8,z:-1.7},{x:-2.1,y:-.8,z:.7},{x:2.1,y:-.8,z:.3},
+    {x:.0,y:-.9,z:2.0},{x:.5,y:-1.1,z:-.2},{x:-1.1,y:-1.3,z:1.0},
+    {x:1.3,y:-1.3,z:-1.1},{x:-1.5,y:-1.4,z:-.3},{x:.5,y:-1.3,z:1.3},
+    {x:-.4,y:-2.2,z:.6},{x:.9,y:-2.2,z:-.3},
+  ];
+
+  const gltf = glbCache[selectedModel] || glbCache['chispin'];
+
+  positions.forEach((pos, i) => {
+    let obj;
+    if(gltf){
+      obj = gltf.scene.clone(true);
+      const d = Math.sqrt(pos.x*pos.x + pos.z*pos.z);
+      const sc = Math.max(.5, 1 - d*.075) * (.85 + Math.random()*.3);
+      normalizeModel(obj, 1.15 * sc);
+    } else {
+      obj = makeFallback(pos);
+    }
+    obj.position.set(pos.x, pos.y, pos.z);
+    obj.rotation.y = Math.random() * Math.PI * 2;
+    obj.userData = {baseY:pos.y, fspd:.3+Math.random()*.5, foff:Math.random()*Math.PI*2};
+    THREE_scene.add(obj);
+    chispines.push(obj);
+  });
+}
+
+function makeFallback(pos){
+  const g = new THREE.Group();
+  const dist = Math.sqrt(pos.x*pos.x+pos.z*pos.z);
+  const sc = Math.max(.5, 1-dist*.07);
+  g.scale.set(sc,sc,sc);
+  const bM = new THREE.MeshStandardMaterial({color:0x8B5E3C,roughness:.8});
+  const sM = new THREE.MeshStandardMaterial({color:0x7B2FBE,roughness:.9});
+  const fM = new THREE.MeshStandardMaterial({color:0xFF4D00,emissive:0xFF4D00,emissiveIntensity:2,transparent:true,opacity:.85});
+  const body = new THREE.Mesh(new THREE.SphereGeometry(.35,8,6),bM); g.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(.24,8,6),bM); head.position.set(0,.38,.14); g.add(head);
+  const scarf = new THREE.Mesh(new THREE.TorusGeometry(.2,.06,6,10),sM); scarf.position.set(0,.18,.1); scarf.rotation.x=Math.PI/2; g.add(scarf);
+  const fl = new THREE.Mesh(new THREE.ConeGeometry(.06,.18,6),fM); fl.position.set(-.28,.05,-.33); fl.rotation.z=-Math.PI/6; g.add(fl);
+  return g;
+}
+
+// ════════════════════════════════════════════
+// CAMERA PRESETS
+// ════════════════════════════════════════════
+const CAM = {
+  front: {pos:[0,1.5,10.5]},
+  left:  {pos:[-10.5,1,1.5]},
+  right: {pos:[10.5,1,-1.5]},
+};
+function setCamPos(view, anim=true){
+  const p = CAM[view].pos;
+  if(anim){ gsap.to(THREE_camera.position,{x:p[0],y:p[1],z:p[2],duration:.7,ease:'power2.inOut'}); }
+  else { THREE_camera.position.set(...p); }
+}
+function setCamera(view, btn){
+  curCam = view;
+  document.querySelectorAll('.cam-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  setCamPos(view);
+}
+
+// ════════════════════════════════════════════
+// RENDER LOOP
+// ════════════════════════════════════════════
+function animate(){
+  rafId = requestAnimationFrame(animate);
+  const t = performance.now() * .001;
+  chispines.forEach(c=>{
+    c.position.y = c.userData.baseY + Math.sin(t*c.userData.fspd+c.userData.foff)*.07;
+    c.rotation.y += .003;
+  });
+  if(!catching && clawGroup) clawGroup.rotation.z = Math.sin(t*.85)*.012;
+  // Look slightly at claw
+  THREE_camera.lookAt(clawPos.x*.15, -.5, clawPos.z*.15);
+  THREE_renderer.render(THREE_scene, THREE_camera);
+}
+
+// ════════════════════════════════════════════
+// JOYSTICK / MOVEMENT
+// ════════════════════════════════════════════
+function step(dir){
+  const s = .13;
+  if(dir==='l') clawPos.x = Math.max(CLAW_LIM.minX, clawPos.x-s);
+  if(dir==='r') clawPos.x = Math.min(CLAW_LIM.maxX, clawPos.x+s);
+  if(dir==='u') clawPos.z = Math.max(CLAW_LIM.minZ, clawPos.z-s);
+  if(dir==='d') clawPos.z = Math.min(CLAW_LIM.maxZ, clawPos.z+s);
+  gsap.to(clawGroup.position,{x:clawPos.x,z:clawPos.z,duration:.1,ease:'power1.out'});
+  document.getElementById('px').textContent = clawPos.x.toFixed(1);
+  document.getElementById('pz').textContent = clawPos.z.toFixed(1);
+}
+function joyOn(dir, btn){ btn.classList.add('pressed'); step(dir); if(moveIv) clearInterval(moveIv); moveIv=setInterval(()=>step(dir),75); }
+function joyOff(btn){ btn.classList.remove('pressed'); clearInterval(moveIv); moveIv=null; }
+
+// Keyboard (desktop)
+const keyDir = {ArrowLeft:'l',ArrowRight:'r',ArrowUp:'u',ArrowDown:'d'};
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('p-machine').classList.contains('off')) return;
+  if(keyDir[e.key]){ e.preventDefault(); if(!moveIv){ step(keyDir[e.key]); moveIv=setInterval(()=>step(keyDir[e.key]),75); } }
+  if(e.code==='Space'){ e.preventDefault(); doCatch(); }
+});
+document.addEventListener('keyup',e=>{ if(keyDir[e.key]){ clearInterval(moveIv); moveIv=null; } });
+
+// ════════════════════════════════════════════
+// TIMER
+// ════════════════════════════════════════════
+function startTimer(secs){
+  clearInterval(timerIv);
+  timerSec = secs;
+  const badge = document.getElementById('timer-badge');
+  const num = document.getElementById('timer-num');
+  badge.style.display = 'block';
+  num.textContent = timerSec;
+  num.classList.remove('urgent');
+  timerIv = setInterval(()=>{
+    timerSec--;
+    num.textContent = timerSec;
+    if(timerSec <= 10) num.classList.add('urgent');
+    if(timerSec <= 0){ clearInterval(timerIv); autoFail(); }
+  }, 1000);
+}
+function stopTimer(){ clearInterval(timerIv); document.getElementById('timer-badge').style.display='none'; }
+function autoFail(){ if(catching) return; catching=true; document.getElementById('btn-catch').disabled=true; performCatch(false); }
+
+// ════════════════════════════════════════════
+// CATCH LOGIC
+// ════════════════════════════════════════════
+function doCatch(){
+  if(catching || attemptIdx>=ATTEMPTS) return;
+  catching = true;
+  stopTimer();
+  document.getElementById('btn-catch').disabled = true;
+
+  // Special: multiple of 100 always wins on first try
+  const isSpecial = (founderId % 100 === 0);
+  const willSucceed = (isSpecial && attemptIdx===0) || Math.random() < SUCCESS_PROB[attemptIdx];
+  performCatch(willSucceed);
+}
+
+function performCatch(success){
+  // Zoom camera
+  const zTarget = curCam==='front' ? 6.5 : 7.5;
+  gsap.to(THREE_camera.position, {z: curCam==='front'?zTarget:THREE_camera.position.z, x: curCam==='front'?THREE_camera.position.x:0, duration:.4, ease:'power2.in'});
+
+  // Lower claw
+  gsap.to(clawGroup.position, {y:-1.8, duration:1.1, ease:'power2.in', onComplete:()=>{
+    if(success){
+      const near = nearestChispin();
+      if(near) gsap.to(near.position, {x:clawPos.x, z:clawPos.z, duration:.25});
+      gsap.to(clawGroup.position, {y:2.2, duration:1.1, ease:'power2.out',
+        onUpdate(){ if(near) near.position.y = clawGroup.position.y - .7; },
+        onComplete(){ celebrateWin(); }
+      });
+    } else {
+      showNearMiss();
+      gsap.to(clawGroup.position,{y:-1.3,duration:.2,ease:'back.out',onComplete:()=>{
+        gsap.to(clawGroup.position,{y:-1.95,duration:.18,ease:'power2.in',onComplete:()=>{
+          gsap.to(clawGroup.position,{y:2.2,duration:.85,ease:'power2.out',onComplete:()=>{ recordMiss(); }});
+        }});
+      }});
+    }
+  }});
+}
+
+function nearestChispin(){
+  let best=null, bd=Infinity;
+  chispines.forEach(c=>{
+    const d = Math.hypot(c.position.x-clawPos.x, c.position.z-clawPos.z);
+    if(d<bd){ bd=d; best=c; }
+  });
+  return best;
+}
+
+function showNearMiss(){
+  const msgs = ['¡¡SE CAE!!','¡CASI!','¡¡SE ESCAPA!!','¡SE SUELTA!'];
+  document.getElementById('nm-txt').textContent = msgs[Math.floor(Math.random()*msgs.length)];
+  const el = document.getElementById('near-miss');
+  gsap.to(el,{opacity:1,duration:.12,onComplete:()=>gsap.to(el,{opacity:0,duration:.5,delay:.65})});
+  gsap.to(THREE_camera.position,{x:'+=.25',yoyo:true,repeat:5,duration:.07});
+}
+
+function recordMiss(){
+  document.getElementById('d'+attemptIdx).classList.add('used');
+  attemptIdx++;
+  catching = false;
+  setCamPos(curCam);
+
+  if(attemptIdx >= ATTEMPTS){
+    // Force final catch after brief pause
+    setTimeout(()=>{
+      catching = true;
+      document.getElementById('btn-catch').disabled = true;
+      flashAttempt('<span style="color:#FF4D00">¡Último intento!</span><br><span style="font-size:.6em;color:#C8A5FF">Esta vez sí</span>');
+      setTimeout(()=>performCatch(true), 2200);
+    }, 700);
+  } else {
+    const nextTime = ATTEMPT_TIMES[attemptIdx];
+    flashAttempt(`<span style="color:var(--gold)">¡Inténtalo de nuevo!</span><br><span style="font-size:.6em;color:#C8A5FF">Intento ${attemptIdx+1}/3 · ${nextTime}s</span>`);
+    setTimeout(()=>{
+      document.getElementById('btn-catch').disabled = false;
+      startTimer(nextTime);
+    }, 2200);
+  }
+}
+
+function flashAttempt(html){
+  const el = document.getElementById('att-flash');
+  el.innerHTML = html; el.style.opacity = '1';
+  gsap.to(el, {opacity:0, delay:1.8, duration:.5});
+}
+
+// ════════════════════════════════════════════
+// WIN SEQUENCE
+// ════════════════════════════════════════════
+function celebrateWin(){
+  stopTimer();
+  const vWrap = document.getElementById('victory-wrap');
+  const vVid = document.getElementById('victory-video');
+  vWrap.style.display = 'flex';
+  vVid.src = 'assets/victory.mp4';
+  vVid.play().catch(()=>{});
+  const done = () => { vWrap.style.display='none'; showCelebration(); };
+  vVid.onended = done;
+  setTimeout(done, 4500); // fallback
+}
+
+function showCelebration(){
+  if(rafId) cancelAnimationFrame(rafId);
+  if(THREE_renderer){ THREE_renderer.dispose(); THREE_renderer=null; }
+
+  document.getElementById('cert-num').textContent = '#' + String(founderId).padStart(6,'0');
+  const now = new Date();
+  document.getElementById('cert-date').textContent = now.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
+
+  const rb = document.getElementById('rarity-b');
+  const rm = {
+    normal:     {cls:'r-normal',     txt:'Edición Fundadores'},
+    festivalero:{cls:'r-festivalero',txt:'⚡ Chispín Festivalero'},
+    dorado:     {cls:'r-dorado',     txt:'✨ Chispín Dorado — 1 de 500'},
+    azul:       {cls:'r-azul',       txt:'💙 Fuego Azul — 1 de 1000'},
+  };
+  const r = rm[rarity];
+  rb.className = 'rarity-b ' + r.cls;
+  rb.textContent = r.txt;
+
+  showPhase('p-celeb');
+  launchFireworks();
+  launchConfetti();
+}
+
+// ════════════════════════════════════════════
+// MAP PHASE
+// ════════════════════════════════════════════
+function goMap(){
+  PROVINCES[4].count++;
+  const tb = document.getElementById('top-table');
+  tb.innerHTML = PROVINCES.map((p,i)=>`
+    <div class="top-row ${p.hl?'hl':''}">
+      <div class="top-rank">${i+1}</div>
+      <div class="top-name">${p.name}${p.hl?' 🔥':''}</div>
+      <div class="top-num">${p.count.toLocaleString('es-ES')}</div>
+    </div>`).join('');
+  document.getElementById('total-n').textContent = (5844).toLocaleString('es-ES');
+  showPhase('p-map');
+}
+
+// ════════════════════════════════════════════
+// GAME FLOW
+// ════════════════════════════════════════════
+async function startGame(){
+  showPhase('p-machine');
+  // Reset
+  attemptIdx=0; catching=false; clawPos={x:0,z:0};
+  founderId = Math.floor(Math.random()*800)+100;
+  rarity = getRarity();
+  ['d0','d1','d2'].forEach(id=>document.getElementById(id).classList.remove('used'));
+  document.getElementById('btn-catch').disabled = false;
+  document.getElementById('timer-badge').style.display = 'none';
+
+  if(founderId%100===0){
+    const wn = document.getElementById('waiting-n');
+    wn.textContent = founderId;
+    wn.style.color = '#FF4D00';
+    wn.style.textShadow = '0 0 10px rgba(255,77,0,.8)';
+    flashAttempt('<span style="color:#FF4D00">🔥 ¡Chispín Especial!</span><br><span style="font-size:.6em;color:#C8A5FF">Unidad nº '+founderId+'</span>');
+  }
+
+  initThree();
+  spawnChispines();
+  animate();
+  setTimeout(()=>startTimer(ATTEMPT_TIMES[0]), 1200);
+}
+
+function resetGame(){
+  if(rafId) cancelAnimationFrame(rafId);
+  if(THREE_renderer){ THREE_renderer.dispose(); THREE_renderer=null; }
+  chispines=[]; clawGroup=null; THREE_scene=null; THREE_camera=null;
+  showPhase('p-intro');
+  initSparks();
+}
+
+// ════════════════════════════════════════════
+// FIREWORKS & CONFETTI
+// ════════════════════════════════════════════
+function launchFireworks(){
+  const cv=document.getElementById('fw-c'); const ctx=cv.getContext('2d');
+  cv.width=innerWidth; cv.height=innerHeight;
+  const cols=['#FFB800','#FF6B00','#FF4D00','#C8A5FF','#7B2FBE','#fff','#FF0080'];
+  let pts=[];
+  const burst=(x,y)=>{ for(let i=0;i<65;i++){ const a=Math.random()*Math.PI*2,s=Math.random()*7+2; pts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,c:cols[Math.floor(Math.random()*cols.length)],a:1,s:Math.random()*3+1}); } };
+  let n=0; const shoot=()=>{ burst(Math.random()*cv.width*.8+cv.width*.1, Math.random()*cv.height*.45+30); n++; if(n<10) setTimeout(shoot,320); }; shoot();
+  const draw=()=>{
+    ctx.fillStyle='rgba(8,0,18,.15)'; ctx.fillRect(0,0,cv.width,cv.height);
+    pts=pts.filter(p=>{ p.x+=p.vx;p.y+=p.vy;p.vy+=.14;p.a-=.02;p.vx*=.98;
+      ctx.globalAlpha=p.a; ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill(); return p.a>0;});
+    ctx.globalAlpha=1;
+    if(pts.length>0) requestAnimationFrame(draw); else ctx.clearRect(0,0,cv.width,cv.height);
+  }; draw();
+}
+
+function launchConfetti(){
+  const cv=document.getElementById('conf-c'); const ctx=cv.getContext('2d');
+  cv.width=innerWidth; cv.height=innerHeight;
+  const cols=['#FFB800','#FF6B00','#7B2FBE','#C8A5FF','#FF4D00','#fff','#FF0080'];
+  let pcs=[]; for(let i=0;i<120;i++) pcs.push({x:Math.random()*cv.width,y:-Math.random()*cv.height,vx:(Math.random()-.5)*3,vy:Math.random()*5+2,c:cols[Math.floor(Math.random()*cols.length)],w:Math.random()*12+4,h:Math.random()*6+2,rot:Math.random()*360,rv:(Math.random()-.5)*5});
+  let fr=0;
+  const draw=()=>{ fr++; ctx.clearRect(0,0,cv.width,cv.height);
+    pcs.forEach(p=>{ ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;p.vy+=.06;});
+    pcs=pcs.filter(p=>p.y<cv.height+20); if(fr<210||pcs.length>0) requestAnimationFrame(draw); else ctx.clearRect(0,0,cv.width,cv.height);
+  }; draw();
+}
+
+// ════════════════════════════════════════════
+// DOWNLOAD CERTIFICATE
+// ════════════════════════════════════════════
+function downloadCert(){
+  const certImg = new Image(); certImg.crossOrigin='anonymous';
+  certImg.src = 'assets/certificate.jpg';
+  certImg.onload=()=>{
+    const c=document.createElement('canvas'); c.width=620; c.height=880;
+    const ctx=c.getContext('2d');
+    ctx.drawImage(certImg,0,0,620,880);
+    ctx.fillStyle='rgba(120,75,0,.92)';
+    ctx.font='bold 58px Georgia,serif';
+    ctx.textAlign='center';
+    ctx.fillText('#'+String(founderId).padStart(6,'0'), 310, 515);
+    ctx.font='bold 18px Georgia,serif';
+    const now=new Date();
+    ctx.fillText(now.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}),310,555);
+    ctx.fillStyle='rgba(90,55,0,.7)'; ctx.font='14px Georgia,serif';
+    ctx.fillText('Edición Fundadores · chispin.es',310,598);
+    c.toBlob(b=>{ const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`certificado-chispin-${founderId}.png`;a.click(); });
+  };
+  certImg.onerror=()=>alert('Descarga disponible en producción.');
+}
+
+// ════════════════════════════════════════════
+// STRIPE PAYMENT
+// ════════════════════════════════════════════
+function submitPayment(){
+  if(PAYMENT_LINK){
+    // Redirect to Stripe Payment Link
+    window.open(PAYMENT_LINK + '?client_reference_id=chispin-' + String(founderId).padStart(6,'0'), '_blank');
+  } else {
+    // Fallback: copy founder ID and show instructions
+    navigator.clipboard.writeText('Chispín #' + String(founderId).padStart(6,'0')).catch(()=>{});
+    alert('⚠️ Configura el PAYMENT_LINK en el código para activar el pago.\nTu número de fundador: #' + String(founderId).padStart(6,'0'));
+  }
+}
+
+// ════════════════════════════════════════════
+// SHARE
+// ════════════════════════════════════════════
+function doShare(){
+  const text = `🔥 He rescatado a mi Chispín #${String(founderId).padStart(6,'0')} 🐂\n#LaChispaNuncaSeApaga #ChispínFundadores\nchispin.es`;
+  if(navigator.share){ navigator.share({title:'Chispín - La Chispa Nunca Se Apaga', text}).catch(()=>{}); }
+  else { navigator.clipboard.writeText(text).then(()=>alert('¡Copiado!')).catch(()=>prompt('Copia este texto:', text)); }
+}
+
+// ════════════════════════════════════════════
+// BOOT
+// ════════════════════════════════════════════
+window.addEventListener('load', async ()=>{
+  setLoad(5, 'Iniciando...');
+  await loadAllModels();
+  modelsLoaded = true;
+  setLoad(100, '¡Todo listo!');
+  setTimeout(()=>{
+    document.getElementById('p-load').classList.add('off');
+    showPhase('p-intro');
+    initSparks();
+  }, 500);
+});
+</script>
+</body>
+</html>
