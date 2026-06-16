@@ -78,6 +78,18 @@ export function FinalCTASection() {
           </ScrollReveal>
 
         </div>
+
+        {/* Legal footer */}
+        <div className="mt-16 pt-8 border-t border-white/10 text-center">
+          <div className="flex items-center justify-center gap-4 flex-wrap text-xs text-white/40 mb-3">
+            <a href="/aviso-legal" className="hover:text-white/60 transition-colors">Aviso Legal</a>
+            <span className="text-white/10">·</span>
+            <a href="/privacidad" className="hover:text-white/60 transition-colors">Privacidad</a>
+            <span className="text-white/10">·</span>
+            <a href="/cookies" className="hover:text-white/60 transition-colors">Cookies</a>
+          </div>
+          <p className="text-white/30 text-xs">© 2026 Chispín. La Chispa Nunca Se Apaga.</p>
+        </div>
       </div>
     </section>
   );

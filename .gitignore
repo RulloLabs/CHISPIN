@@ -29,9 +29,37 @@ pnpm-debug.log*
 *.zip
 *.tar.gz
 *.rar
+*.gz
 files.zip
 chispin-project.zip
 chispin-deploy/
+
+# Provisional / draft assets
+ASETS PROVISIONALES/
+app/public/ASETS PROVISIONALES/
+
+# Legacy juego directory (replaced by React game)
+app/public/juego/
+
+# Legacy media files in public root
+app/public/*.mp4
+app/public/*.mp3
+
+# Old draft images (non-production)
+app/public/images/ADADA.png
+app/public/images/DADDAADA.png
+app/public/images/DSADADSA.png
+app/public/images/DSS.png
+app/public/images/WER.png
+app/public/images/aaSDDAS.png
+app/public/images/botony.png
+app/public/images/ssssss.png
+app/public/images/village-scene.jpg
+
+# Prompt / agent files
+ANTIGRAVITY_PROMPT.md
+CLAUDE_PROMPT.md
+AGENTS.md
 
 # Editor & OS
 .vscode/*

@@ -6,8 +6,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 const APP_URL =
-  process.env.VITE_APP_URL ||
   process.env.NEXT_PUBLIC_URL ||
+  process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` ||
   'https://chispin.vercel.app';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -25,7 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { name, email } = req.body;
+    const { name, email, founderId } = req.body;
 
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
@@ -54,8 +54,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         name: name || '',
         email,
         edition: 'fundadores',
+        founderId: String(founderId || ''),
       },
-      success_url: `${APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${APP_URL}/success?session_id={CHECKOUT_SESSION_ID}&founderId=${founderId || ''}`,
       cancel_url: `${APP_URL}/`,
     });
 

@@ -4,11 +4,19 @@ import { Link, useSearchParams } from 'react-router';
 export default function Success() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
+  const urlFounderId = searchParams.get('founderId');
   const [loading, setLoading] = useState(true);
   const [founderNumber, setFounderNumber] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Use URL param first (passed directly from reserve flow)
+    if (urlFounderId) {
+      setFounderNumber(Number(urlFounderId));
+      setLoading(false);
+      return;
+    }
+
     if (!sessionId) {
       setError('No se encontró la sesión de pago');
       setLoading(false);
@@ -25,14 +33,13 @@ export default function Success() {
           setError('No se pudo verificar el pago');
         }
       } catch {
-        // Fallback: mostrar éxito de todos modos
         setFounderNumber(Math.floor(Math.random() * 500) + 1);
       }
       setLoading(false);
     };
 
     checkSession();
-  }, [sessionId]);
+  }, [sessionId, urlFounderId]);
 
   if (loading) {
     return (

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 interface ReservationContextType {
   isClawMachineOpen: boolean;
@@ -21,26 +21,34 @@ export function ReservationProvider({ children }: { children: React.ReactNode })
   // Fetch initial count from Supabase
   useEffect(() => {
     const fetchCount = async () => {
-      const { count } = await supabase
+      const sb = getSupabase();
+      if (!sb) {
+        setReservationCount(247);
+        return;
+      }
+      const { count } = await sb
         .from('reservations')
         .select('*', { count: 'exact', head: true });
       if (count !== null) {
-        setReservationCount(count + 247); // +247 como offset inicial base
+        setReservationCount(count + 247);
       }
     };
     fetchCount();
 
     // Set up realtime subscription
-    const subscription = supabase
-      .channel('reservations-channel')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reservations' }, () => {
-        setReservationCount(prev => prev + 1);
-      })
-      .subscribe();
+    const sb = getSupabase();
+    if (sb) {
+      const subscription = sb
+        .channel('reservations-channel')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reservations' }, () => {
+          setReservationCount(prev => prev + 1);
+        })
+        .subscribe();
 
-    return () => {
-      subscription.unsubscribe();
-    };
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
   }, []);
 
   const openClawMachine = useCallback(() => setIsClawMachineOpen(true), []);
@@ -50,19 +58,17 @@ export function ReservationProvider({ children }: { children: React.ReactNode })
   }, []);
 
   const completeReservation = useCallback(async (name: string, email: string) => {
-    // Generar un número de fundador
     const num = reservationCount + 1;
-    
-    // Insert into Supabase
-    const { error } = await supabase.from('reservations').insert([
-      { name, email, founder_number: num, status: 'pending' }
-    ]);
-    
-    if (error) {
-      console.error('Error saving reservation:', error);
-      return;
+    const sb = getSupabase();
+    if (sb) {
+      const { error } = await sb.from('reservations').insert([
+        { name, email, founder_number: num, status: 'pending' }
+      ]);
+      if (error) {
+        console.error('Error saving reservation:', error);
+        return;
+      }
     }
-
     setFounderNumber(num);
   }, [reservationCount]);
 

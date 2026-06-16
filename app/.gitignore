@@ -24,6 +24,14 @@ dist-ssr
 *.zip
 files.zip
 
+# Provisional / draft assets
+public/ASETS PROVISIONALES/
+public/juego/
+
+# Legacy media in public root
+public/*.mp4
+public/*.mp3
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
