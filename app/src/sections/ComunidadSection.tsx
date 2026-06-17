@@ -27,10 +27,10 @@ export function ComunidadSection() {
               background: 'linear-gradient(135deg,#FFB800,#FF6B00)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             }}>
-              DE CHISPÍN
+              DE CHISP├ìN
             </span>
           </h2>
-          <p className="text-white/55 font-nunito mt-3">Cada día somos más. ¿Desde dónde nos acompañas?</p>
+          <p className="text-white/55 font-nunito mt-3">Cada d├¡a somos m├ís. ┬┐Desde d├│nde nos acompa├▒as?</p>
         </ScrollReveal>
 
         <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -44,7 +44,7 @@ export function ComunidadSection() {
                   style={{ border: '1.5px solid rgba(255,184,0,0.4)' }}>
                   <Flame className="w-5 h-5 text-[#FF6B00]" />
                   <span className="font-bangers text-3xl text-[#FFB800] tracking-wider">
-                    <CountUp end={reservationCount} duration={2} separator="." />
+                    <CountUp end={reservationCount ?? 0} duration={2} separator="." />
                   </span>
                   <span className="text-white/70 font-nunito font-bold text-sm uppercase tracking-wide">
                     Chispines Rescatados
@@ -57,7 +57,7 @@ export function ComunidadSection() {
                 style={{ boxShadow: '0 0 60px rgba(74,14,143,0.4)' }}>
                 <img
                   src="/images/spain-map-3d.png"
-                  alt="Mapa de España — La Manada de Chispín"
+                  alt="Mapa de Espa├▒a ÔÇö La Manada de Chisp├¡n"
                   className="w-full object-contain rounded-2xl"
                 />
                 <div className="absolute inset-0 rounded-2xl"
@@ -91,7 +91,7 @@ export function ComunidadSection() {
                     </div>
                     {/* Name */}
                     <span className={`flex-1 font-nunito font-bold text-sm ${p.highlight ? 'text-[#FF6B00]' : 'text-white/70'}`}>
-                      {p.name}{p.highlight ? ' 🔥' : ''}
+                      {p.name}{p.highlight ? ' ­ƒöÑ' : ''}
                     </span>
                     {/* Count */}
                     <span className={`font-nunito font-black text-sm ${p.highlight ? 'text-[#FF6B00]' : 'text-[#FFB800]'}`}>

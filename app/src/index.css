@@ -57,7 +57,7 @@
 }
 
 @layer components {
-  /* ── Gradients ── */
+  /* ÔöÇÔöÇ Gradients ÔöÇÔöÇ */
   .gradient-fire {
     background: linear-gradient(135deg, #FF6B00 0%, #FFB800 100%);
   }
@@ -70,7 +70,7 @@
     background: linear-gradient(135deg, #FFB800 0%, #FF6B00 100%);
   }
 
-  /* ── Text Gradients ── */
+  /* ÔöÇÔöÇ Text Gradients ÔöÇÔöÇ */
   .text-gradient-fire {
     background: linear-gradient(135deg, #FF6B00 0%, #FFB800 100%);
     -webkit-background-clip: text;
@@ -92,7 +92,7 @@
     background-clip: text;
   }
 
-  /* ── Glass ── */
+  /* ÔöÇÔöÇ Glass ÔöÇÔöÇ */
   .glass {
     background: rgba(74, 14, 143, 0.15);
     backdrop-filter: blur(20px);
@@ -107,7 +107,7 @@
     border: 1.5px solid rgba(255, 184, 0, 0.25);
   }
 
-  /* ── Buttons ── */
+  /* ÔöÇÔöÇ Buttons ÔöÇÔöÇ */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-nunito font-black text-sm uppercase tracking-wide cursor-pointer;
     background: linear-gradient(135deg, #FFB800, #FF6B00);
@@ -151,7 +151,7 @@
     transform: scale(1.03);
   }
 
-  /* ── Layout ── */
+  /* ÔöÇÔöÇ Layout ÔöÇÔöÇ */
   .section-padding {
     @apply py-20 md:py-28;
   }
@@ -160,7 +160,7 @@
     @apply max-w-6xl mx-auto px-5 md:px-10;
   }
 
-  /* ── Section label ── */
+  /* ÔöÇÔöÇ Section label ÔöÇÔöÇ */
   .section-label {
     @apply inline-block px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-4;
     background: rgba(255, 184, 0, 0.12);
@@ -168,7 +168,7 @@
     color: #FFB800;
   }
 
-  /* ── Badge (HUD style) ── */
+  /* ÔöÇÔöÇ Badge (HUD style) ÔöÇÔöÇ */
   .hud-badge {
     @apply rounded-xl px-3 py-1.5 text-center;
     background: rgba(8, 0, 18, 0.82);
@@ -176,7 +176,7 @@
     backdrop-filter: blur(8px);
   }
 
-  /* ── Neon border animation ── */
+  /* ÔöÇÔöÇ Neon border animation ÔöÇÔöÇ */
   .neon-border {
     border: 2px solid #4A0E8F;
     animation: arcade-light 1.5s linear infinite;
@@ -198,7 +198,7 @@
   }
 }
 
-/* ── Animations ── */
+/* ÔöÇÔöÇ Animations ÔöÇÔöÇ */
 @keyframes float {
   0%, 100% { transform: translateY(-8px); }
   50% { transform: translateY(8px); }

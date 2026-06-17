@@ -12,10 +12,8 @@ out/
 
 # Environment variables — NEVER commit these
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
 # Logs
 logs/
@@ -32,6 +30,19 @@ pnpm-debug.log*
 files.zip
 chispin-project.zip
 chispin-deploy/
+
+# AI prompt files (personal)
+ANTIGRAVITY_PROMPT.md
+CLAUDE_PROMPT.md
+
+# Next.js types (not used with Vite)
+next-env.d.ts
+
+# Orphaned legacy directories
+app/public/ASETS\ PROVISIONALES/
+app/public/juego/
+app-v2/
+/src/
 
 # Editor & OS
 .vscode/*

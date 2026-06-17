@@ -13,9 +13,9 @@ const features = [
   '18 cm de ternura',
   'Peluche ultra suave',
   'Bordados premium',
-  'Cola de fuego característica',
-  'Pañuelo icónico morado',
-  'Edición Fundadores numerada',
+  'Cola de fuego caracter├¡stica',
+  'Pa├▒uelo ic├│nico morado',
+  'Edici├│n Fundadores numerada',
 ];
 
 export function ProductoSection() {
@@ -57,7 +57,7 @@ export function ProductoSection() {
                 <img
                   key={idx}
                   src={views[idx].img}
-                  alt={`Chispín — ${views[idx].label}`}
+                  alt={`Chisp├¡n ÔÇö ${views[idx].label}`}
                   className="relative h-full object-contain drop-shadow-2xl transition-all duration-300 animate-float"
                 />
               </div>
@@ -105,12 +105,12 @@ export function ProductoSection() {
               <span className="font-bangers text-5xl" style={{
                 background: 'linear-gradient(135deg,#FFB800,#FF6B00)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>39€</span>
-              <span className="text-white/40 font-nunito text-sm">Envío incluido en España</span>
+              }}>39Ôé¼</span>
+              <span className="text-white/40 font-nunito text-sm">Env├¡o incluido en Espa├▒a</span>
             </div>
 
             <button onClick={openClawMachine} className="btn-primary text-sm px-8 py-3.5">
-              VER TODOS LOS ÁNGULOS
+              VER TODOS LOS ├üNGULOS
             </button>
           </ScrollReveal>
         </div>

@@ -5,8 +5,8 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 const cards = [
   {
     icon: Clock,
-    title: 'Las peñas cambian',
-    text: 'Los grupos de siempre se transforman, pero el espíritu permanece.',
+    title: 'Las pe├▒as cambian',
+    text: 'Los grupos de siempre se transforman, pero el esp├¡ritu permanece.',
     color: 'text-fuego',
   },
   {
@@ -18,7 +18,7 @@ const cards = [
   {
     icon: Flame,
     title: 'La chispa permanece',
-    text: 'Chispín guarda ese recuerdo para siempre.',
+    text: 'Chisp├¡n guarda ese recuerdo para siempre.',
     color: 'text-chispa',
   },
 ];
@@ -30,12 +30,12 @@ export function ProblemaSection() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <ScrollReveal>
-            <SectionLabel text="El Porqué" />
+            <SectionLabel text="El Porqu├®" />
             <h2 className="font-poppins font-extrabold text-3xl md:text-4xl lg:text-5xl text-white mb-6">
               Algunas tradiciones se apagan
             </h2>
             <p className="text-lg text-white/70 leading-relaxed">
-              Las peñas cambian. Las generaciones pasan. Los pueblos crecen de otra forma. Pero algunos recuerdos merecen quedarse para siempre. Chispín nace para representar esos momentos que no queremos que se pierdan.
+              Las pe├▒as cambian. Las generaciones pasan. Los pueblos crecen de otra forma. Pero algunos recuerdos merecen quedarse para siempre. Chisp├¡n nace para representar esos momentos que no queremos que se pierdan.
             </p>
           </ScrollReveal>
         </div>

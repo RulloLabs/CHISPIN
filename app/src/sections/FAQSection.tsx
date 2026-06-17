@@ -3,12 +3,12 @@ import { Plus, Minus } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 
 const faqs = [
-  { q: '¿CUÁNDO SE FABRICA?', a: 'Comenzaremos la producción en masa una vez alcancemos el objetivo de reservas para la Edición Fundadores.' },
-  { q: '¿HABRÁ MÁS VERSIONES?', a: 'Sí, pero la Edición Fundadores con este certificado y numeración es única e irrepetible.' },
-  { q: '¿CUÁNDO RECIBIRÉ MI CHISPÍN?', a: 'Las entregas están previstas para principios del próximo año. Te mantendremos informado de cada paso de la fabricación.' },
-  { q: '¿PUEDO PERSONALIZARLO PARA MI PEÑA?', a: 'Actualmente no, pero estamos trabajando en accesorios como pañuelos de diferentes colores para el futuro.' },
-  { q: '¿ES UNA EDICIÓN LIMITADA?', a: 'Sí, la Edición Fundadores está estrictamente limitada a las primeras 10.000 unidades.' },
-  { q: '¿CÓMO FUNCIONA LA RESERVA?', a: 'Al hacer tu reserva aseguras tu unidad. Solo te cobraremos cuando la producción esté lista para enviarse.' },
+  { q: '┬┐CU├üNDO SE FABRICA?', a: 'Comenzaremos la producci├│n en masa una vez alcancemos el objetivo de reservas para la Edici├│n Fundadores.' },
+  { q: '┬┐HABR├ü M├üS VERSIONES?', a: 'S├¡, pero la Edici├│n Fundadores con este certificado y numeraci├│n es ├║nica e irrepetible.' },
+  { q: '┬┐CU├üNDO RECIBIR├ë MI CHISP├ìN?', a: 'Las entregas est├ín previstas para principios del pr├│ximo a├▒o. Te mantendremos informado de cada paso de la fabricaci├│n.' },
+  { q: '┬┐PUEDO PERSONALIZARLO PARA MI PE├æA?', a: 'Actualmente no, pero estamos trabajando en accesorios como pa├▒uelos de diferentes colores para el futuro.' },
+  { q: '┬┐ES UNA EDICI├ôN LIMITADA?', a: 'S├¡, la Edici├│n Fundadores est├í estrictamente limitada a las primeras 10.000 unidades.' },
+  { q: '┬┐C├ôMO FUNCIONA LA RESERVA?', a: 'Al hacer tu reserva aseguras tu unidad. Solo te cobraremos cuando la producci├│n est├® lista para enviarse.' },
 ];
 
 export function FAQSection() {
@@ -79,7 +79,7 @@ export function FAQSection() {
               
               <img 
                 src="/images/chispin-box.png" 
-                alt="Chispín en su caja"
+                alt="Chisp├¡n en su caja"
                 className="relative w-[400px] object-contain animate-float drop-shadow-xl"
               />
             </div>

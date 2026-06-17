@@ -4,8 +4,8 @@ import { Shield, Truck, Lock } from 'lucide-react';
 import { useReservation } from '@/context/ReservationContext';
 
 const trustBadges = [
-  { icon: Shield, label: 'Edición Fundadores', sub: 'Solo las primeras 5.000 unidades' },
-  { icon: Truck, label: 'Envío Garantizado', sub: 'A toda España en 5-7 días' },
+  { icon: Shield, label: 'Edici├│n Fundadores', sub: 'Solo las primeras 5.000 unidades' },
+  { icon: Truck, label: 'Env├¡o Garantizado', sub: 'A toda Espa├▒a en 5-7 d├¡as' },
   { icon: Lock, label: 'Pago Seguro', sub: 'Stripe cifrado 256-bit' },
 ];
 
@@ -127,13 +127,13 @@ export function HeroSection() {
 
             {/* Sub */}
             <p className="text-white/65 font-nunito text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8">
-              Chispín guarda todas esas historias que nacen en una peña, una verbena o una noche de verano.
+              Chisp├¡n guarda todas esas historias que nacen en una pe├▒a, una verbena o una noche de verano.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
               <button onClick={openClawMachine} className="btn-primary text-base px-8 py-4">
-                🔥 RESERVA TU CHISPÍN
+                ­ƒöÑ RESERVA TU CHISP├ìN
               </button>
               <button onClick={scrollToOrigen} className="btn-outline text-base px-8 py-4">
                 DESCUBRE SU HISTORIA
@@ -152,7 +152,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT: Chispín + badge */}
+          {/* RIGHT: Chisp├¡n + badge */}
           <div ref={imgRef} className="lg:col-span-2 relative flex justify-center lg:justify-end" style={{ opacity: 0 }}>
             <div className="relative">
               {/* "18 CM" badge */}
@@ -172,10 +172,10 @@ export function HeroSection() {
                   style={{ background: 'radial-gradient(circle, rgba(255,107,0,0.3) 0%, rgba(74,14,143,0.2) 50%, transparent 70%)' }} />
               </div>
 
-              {/* Chispín image */}
+              {/* Chisp├¡n image */}
               <img
                 src="/images/chispin-hero.png"
-                alt="Chispín — Edición Fundadores"
+                alt="Chisp├¡n ÔÇö Edici├│n Fundadores"
                 className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[380px] lg:h-[380px] object-contain animate-float drop-shadow-2xl"
               />
 

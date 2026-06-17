@@ -17,7 +17,7 @@ export function SocialSection() {
         <ScrollReveal>
           <div className="section-label">La Chispa Nunca Se Apaga</div>
           <h2 className="font-bangers text-4xl md:text-5xl lg:text-6xl text-white mb-2 leading-tight">
-            COMPARTE TU CHISPÍN<br />CON EL MUNDO
+            COMPARTE TU CHISP├ìN<br />CON EL MUNDO
           </h2>
           <p className="text-[#FF6B00] font-nunito font-bold text-lg md:text-xl mb-10">
             #LaChispaNuncaSeApaga
@@ -38,7 +38,7 @@ export function SocialSection() {
                   <div key={i} className="aspect-square rounded-2xl overflow-hidden group">
                     <img
                       src={src}
-                      alt="Chispín en el mundo"
+                      alt="Chisp├¡n en el mundo"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -51,7 +51,7 @@ export function SocialSection() {
             </div>
           </ScrollReveal>
 
-          {/* RIGHT: Floating Chispín + CTA */}
+          {/* RIGHT: Floating Chisp├¡n + CTA */}
           <ScrollReveal delay={0.15} className="w-full lg:w-1/3 flex flex-col items-center">
             <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6">
               {/* Glow */}
@@ -61,7 +61,7 @@ export function SocialSection() {
               </div>
               <img
                 src="/images/chispin-box.png"
-                alt="Chispín en su caja"
+                alt="Chisp├¡n en su caja"
                 className="relative w-full h-full object-contain animate-float drop-shadow-2xl"
               />
             </div>
@@ -69,7 +69,7 @@ export function SocialSection() {
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
               className="btn-secondary text-xs px-8 py-4 flex items-center gap-2 w-full max-w-[280px]">
               <Instagram className="w-4 h-4" />
-              VER MÁS EN INSTAGRAM
+              VER M├üS EN INSTAGRAM
             </a>
           </ScrollReveal>
 
