@@ -3,10 +3,10 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 
 const values = [
   { icon: Heart, label: 'Amistad' },
-  { icon: Star, label: 'Tradición' },
-  { icon: Smile, label: 'Diversión' },
-  { icon: Users, label: 'Unión' },
-  { icon: Music, label: 'Alegría' },
+  { icon: Star, label: 'Tradici├│n' },
+  { icon: Smile, label: 'Diversi├│n' },
+  { icon: Users, label: 'Uni├│n' },
+  { icon: Music, label: 'Alegr├¡a' },
 ];
 
 export function OrigenSection() {
@@ -23,20 +23,20 @@ export function OrigenSection() {
           <ScrollReveal className="order-1">
             <div className="section-label">Su Historia</div>
             <h2 className="font-bangers text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
-              ¿QUIÉN ES<br />
+              ┬┐QUI├ëN ES<br />
               <span style={{
                 background: 'linear-gradient(135deg,#FFB800,#FF6B00)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               }}>
-                CHISPÍN?
+                CHISP├ìN?
               </span>
             </h2>
 
             <p className="text-white/70 font-nunito text-base md:text-lg leading-relaxed mb-4">
-              Chispín nació de una pequeña chispa perdida durante una noche de fiesta en un pueblo de montaña.
+              Chisp├¡n naci├│ de una peque├▒a chispa perdida durante una noche de fiesta en un pueblo de monta├▒a.
             </p>
             <p className="text-white/55 font-nunito text-sm md:text-base leading-relaxed mb-10">
-              Desde entonces, recorre pueblos y ciudades manteniendo viva la alegría, las tradiciones y las amistades que nos unen.
+              Desde entonces, recorre pueblos y ciudades manteniendo viva la alegr├¡a, las tradiciones y las amistades que nos unen.
             </p>
 
             {/* Value icons */}
@@ -59,7 +59,7 @@ export function OrigenSection() {
             <div className="relative rounded-3xl overflow-hidden">
               <img
                 src="/images/village-scene.png"
-                alt="Pueblo de fiestas — donde nació Chispín"
+                alt="Pueblo de fiestas ÔÇö donde naci├│ Chisp├¡n"
                 className="w-full h-[320px] md:h-[420px] object-cover rounded-3xl"
               />
               {/* Gradient overlay */}

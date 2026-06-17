@@ -1,13 +1,14 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
+import { rateLimit } from './_rate-limit.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-05-27.dahlia',
 });
 
 const APP_URL =
-  process.env.VITE_APP_URL ||
   process.env.NEXT_PUBLIC_URL ||
+  process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` ||
   'https://chispin.vercel.app';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -22,6 +23,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Rate limit by IP
+  const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0] ?? 'unknown';
+  if (!rateLimit(ip)) {
+    return res.status(429).json({ error: 'Demasiadas solicitudes. Intenta de nuevo en un minuto.' });
   }
 
   try {
@@ -41,11 +48,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           price_data: {
             currency: 'eur',
             product_data: {
-              name: 'Chispín — Edición Fundadores',
-              description: 'Unidad exclusiva numerada de la primera generación. Envío garantizado.',
+              name: 'Chisp├¡n ÔÇö Edici├│n Fundadores',
+              description: 'Unidad exclusiva numerada de la primera generaci├│n. Env├¡o garantizado.',
               images: [`${APP_URL}/images/chispin-hero.png`],
             },
-            unit_amount: 3900, // €39.00
+            unit_amount: 3900, // Ôé¼39.00
           },
           quantity: 1,
         },

@@ -3,9 +3,9 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { useReservation } from '@/context/ReservationContext';
 
 const steps = [
-  'Entra en la máquina',
+  'Entra en la m├íquina',
   'Elige tu momento',
-  'Atrapa tu Chispín',
+  'Atrapa tu Chisp├¡n',
   'Recibe tu certificado',
 ];
 
@@ -29,10 +29,10 @@ export function MaquinaSection() {
           <ScrollReveal className="lg:col-span-1">
             <div className="section-label">La Experiencia</div>
             <h2 className="font-bangers text-4xl md:text-5xl text-white mb-4 leading-tight">
-              UNA EXPERIENCIA QUE NO OLVIDARÁS
+              UNA EXPERIENCIA QUE NO OLVIDAR├üS
             </h2>
             <p className="text-white/60 font-nunito text-sm leading-relaxed mb-6">
-              No es solo una reserva. Es rescatar a tu Chispín.
+              No es solo una reserva. Es rescatar a tu Chisp├¡n.
             </p>
 
             <ol className="space-y-3 mb-8">
@@ -58,14 +58,14 @@ export function MaquinaSection() {
             <div className="relative flex flex-col items-center">
               {/* Machine box */}
               <div className="relative w-full max-w-sm mx-auto">
-                {/* ATRÁPALO label */}
+                {/* ATR├üPALO label */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 px-6 py-1.5 rounded-full font-bangers text-xl tracking-widest"
                   style={{
                     background: 'linear-gradient(135deg,#FFB800,#FF6B00)',
                     color: '#1A0040',
                     boxShadow: '0 0 20px rgba(255,184,0,0.5)',
                   }}>
-                  ATRÁPALO
+                  ATR├üPALO
                 </div>
 
                 <div className="relative rounded-2xl overflow-hidden border-4 cursor-pointer group"
@@ -73,7 +73,7 @@ export function MaquinaSection() {
                   onClick={openClawMachine}>
                   <img
                     src="/images/claw-machine.jpg"
-                    alt="Máquina arcade de Chispín"
+                    alt="M├íquina arcade de Chisp├¡n"
                     className="w-full h-[300px] md:h-[360px] object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0"
@@ -98,8 +98,8 @@ export function MaquinaSection() {
 
               <div className="text-center mb-4">
                 <CheckCircle2 className="w-8 h-8 text-[#FFB800] mx-auto mb-2" />
-                <div className="font-bangers text-2xl text-white leading-tight">¡ENHORABUENA!</div>
-                <p className="text-white/60 font-nunito text-sm mt-1">Has rescatado tu Chispín</p>
+                <div className="font-bangers text-2xl text-white leading-tight">┬íENHORABUENA!</div>
+                <p className="text-white/60 font-nunito text-sm mt-1">Has rescatado tu Chisp├¡n</p>
               </div>
 
               {/* Certificate preview */}
@@ -107,7 +107,7 @@ export function MaquinaSection() {
                 style={{ border: '2px solid rgba(255,184,0,0.4)' }}>
                 <img src="/images/certificate.jpg" alt="Certificado" className="w-full h-32 object-cover opacity-80" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-white/40 font-nunito font-bold text-[10px] uppercase tracking-widest">Edición Fundadores</span>
+                  <span className="text-white/40 font-nunito font-bold text-[10px] uppercase tracking-widest">Edici├│n Fundadores</span>
                   <span className="font-bangers text-[#FFB800] text-3xl tracking-widest">{displayNumber}</span>
                 </div>
               </div>

@@ -21,7 +21,7 @@ export function FinalCTASection() {
             <div className="relative flex justify-center -mb-24">
               <img 
                 src="/images/chispin-hero.png" 
-                alt="Chispín"
+                alt="Chisp├¡n"
                 className="w-80 h-80 object-contain animate-float drop-shadow-2xl"
               />
             </div>
@@ -41,12 +41,12 @@ export function FinalCTASection() {
                 </span>
               </h2>
               <p className="text-white/70 font-nunito text-base md:text-lg mb-8 max-w-xl mx-auto lg:mx-0">
-                Rescata tu Chispín y forma parte de la primera generación.
+                Rescata tu Chisp├¡n y forma parte de la primera generaci├│n.
               </p>
               
               <button onClick={openClawMachine} 
                 className="btn-primary text-base px-10 py-5 w-full sm:w-auto animate-pulse-glow">
-                QUIERO RESCATAR MI CHISPÍN <Flame className="w-5 h-5 ml-2 inline-block" />
+                QUIERO RESCATAR MI CHISP├ìN <Flame className="w-5 h-5 ml-2 inline-block" />
               </button>
             </div>
 
@@ -66,7 +66,7 @@ export function FinalCTASection() {
                   boxShadow: '0 0 30px rgba(255,184,0,0.4)'
                 }}>
                 <span className="font-bangers text-[#FFB800] text-2xl tracking-wider leading-none mb-1">
-                  EDICIÓN<br/>FUNDADORES
+                  EDICI├ôN<br/>FUNDADORES
                 </span>
                 <div className="w-12 h-0.5 bg-[#FF6B00] my-2" />
                 <span className="text-white/60 font-nunito font-bold text-[9px] uppercase tracking-wider leading-tight">
@@ -77,6 +77,18 @@ export function FinalCTASection() {
 
           </ScrollReveal>
 
+        </div>
+
+        {/* Legal footer */}
+        <div className="mt-16 pt-8 border-t border-white/10 text-center">
+          <div className="flex items-center justify-center gap-4 flex-wrap text-xs text-white/40 mb-3">
+            <a href="/aviso-legal" className="hover:text-white/60 transition-colors">Aviso Legal</a>
+            <span className="text-white/10">┬À</span>
+            <a href="/privacidad" className="hover:text-white/60 transition-colors">Privacidad</a>
+            <span className="text-white/10">┬À</span>
+            <a href="/cookies" className="hover:text-white/60 transition-colors">Cookies</a>
+          </div>
+          <p className="text-white/30 text-xs">┬® 2026 Chisp├¡n. La Chispa Nunca Se Apaga.</p>
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@ import { RotateCcw, Smartphone } from 'lucide-react';
 // Preload for faster first render
 useGLTF.preload('/models/chispin.glb');
 
-/* ─── Gyroscope Hook ─────────────────────────────────────────────────────── */
+/* ÔöÇÔöÇÔöÇ Gyroscope Hook ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */
 
 function useGyroscope() {
   const [gyro, setGyro] = useState({ alpha: 0, beta: 0, gamma: 0 });
@@ -33,7 +33,7 @@ function useGyroscope() {
         setEnabled(false);
       }
     } else {
-      // Android / desktop – no permission needed
+      // Android / desktop ÔÇô no permission needed
       setEnabled(true);
       setAvailable(true);
     }
@@ -60,7 +60,7 @@ function useGyroscope() {
   return { gyro, available, enabled, requestPermission };
 }
 
-/* ─── Model ──────────────────────────────────────────────────────────────── */
+/* ÔöÇÔöÇÔöÇ Model ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */
 
 interface ModelProps {
   autoRotate: boolean;
@@ -104,7 +104,7 @@ function Model({ autoRotate, gyroOffset, scale = 2.1 }: ModelProps) {
   );
 }
 
-/* ─── Loading Ring ───────────────────────────────────────────────────────── */
+/* ÔöÇÔöÇÔöÇ Loading Ring ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */
 
 function LoadingRing() {
   const ref = useRef<THREE.Mesh>(null);
@@ -127,7 +127,7 @@ function LoadingRing() {
   );
 }
 
-/* ─── Camera rig controlled by OrbitControls + gyro ─────────────────────── */
+/* ÔöÇÔöÇÔöÇ Camera rig controlled by OrbitControls + gyro ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */
 
 function CameraController({
   gyroEnabled,
@@ -159,7 +159,7 @@ function CameraController({
   return null;
 }
 
-/* ─── Main component ─────────────────────────────────────────────────────── */
+/* ÔöÇÔöÇÔöÇ Main component ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */
 
 export interface Chispin3DProps {
   className?: string;
@@ -219,7 +219,7 @@ export function Chispin3D({
   return (
     <div className={`relative w-full h-full select-none touch-none ${className}`}>
 
-      {/* Immersive ambient glow – always visible even with transparent bg */}
+      {/* Immersive ambient glow ÔÇô always visible even with transparent bg */}
       <div
         className="absolute inset-0 pointer-events-none z-0 rounded-2xl overflow-hidden"
         style={{
@@ -250,7 +250,7 @@ export function Chispin3D({
             className="flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] text-white/65 border border-white/12"
             style={{ background: 'rgba(10,5,22,0.78)', backdropFilter: 'blur(12px)' }}
           >
-            <span>{isMobile ? '👆 Arrastra para rotar · Pellizca para zoom' : '🖱️ Arrastra para rotar · Rueda para zoom'}</span>
+            <span>{isMobile ? '­ƒæå Arrastra para rotar ┬À Pellizca para zoom' : '­ƒû▒´©Å Arrastra para rotar ┬À Rueda para zoom'}</span>
           </div>
         </div>
       )}
@@ -260,7 +260,7 @@ export function Chispin3D({
         camera={{ position: [0, 0.5, 5.5], fov: isMobile ? 38 : 32 }}
         gl={{ alpha: transparentBg, antialias: !isMobile, powerPreference: 'high-performance' }}
         style={{ background: transparentBg ? 'transparent' : undefined, touchAction: 'none' }}
-        shadows={!isMobile}
+        shadows={!isMobile ? "percentage" : false}
         dpr={[1, isMobile ? 1.5 : 2]}
         onPointerDown={handlePointerDown}
         onTouchStart={handlePointerDown}
@@ -335,7 +335,7 @@ export function Chispin3D({
           {/* Auto-rotate toggle */}
           <button
             onClick={toggleAutoRotate}
-            title={autoRotate ? 'Detener rotación' : 'Activar rotación'}
+            title={autoRotate ? 'Detener rotaci├│n' : 'Activar rotaci├│n'}
             className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-200 shadow-lg active:scale-90 ${
               autoRotate && !interacted
                 ? 'bg-chispa border-chispa text-negro scale-105'

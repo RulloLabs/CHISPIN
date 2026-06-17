@@ -8,24 +8,24 @@ const benefits = [
   {
     icon: Award,
     title: 'Certificado Digital',
-    text: 'Descarga tu certificado exclusivo de Fundador con número único.',
+    text: 'Descarga tu certificado exclusivo de Fundador con n├║mero ├║nico.',
   },
   {
     icon: Star,
     title: 'Acceso VIP',
-    text: 'Serás el primero en conocer nuevas ediciones y colaboraciones.',
+    text: 'Ser├ís el primero en conocer nuevas ediciones y colaboraciones.',
   },
   {
     icon: Users,
     title: 'Comunidad Privada',
-    text: 'Únete a la comunidad exclusiva de Fundadores de Chispín.',
+    text: '├Ünete a la comunidad exclusiva de Fundadores de Chisp├¡n.',
   },
 ];
 
 export function FundadoresSection() {
   const { reservationCount, openClawMachine } = useReservation();
-  const progress = Math.min((reservationCount / 5000) * 100, 100);
-  const remaining = Math.max(5000 - reservationCount, 0);
+  const progress = Math.min(((reservationCount ?? 0) / 5000) * 100, 100);
+  const remaining = Math.max(5000 - (reservationCount ?? 0), 0);
 
   return (
     <section id="fundadores" className="relative section-padding gradient-purple">
@@ -33,12 +33,12 @@ export function FundadoresSection() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <ScrollReveal>
-            <SectionLabel text="Primera Edición" color="yellow" />
+            <SectionLabel text="Primera Edici├│n" color="yellow" />
             <h2 className="font-poppins font-black text-4xl md:text-5xl lg:text-6xl text-white mb-4">
-              Sé Fundador de la Manada
+              S├® Fundador de la Manada
             </h2>
             <p className="text-lg text-white/80 leading-relaxed">
-              Solo las primeras 5.000 reservas recibirán el estatus de Fundador con beneficios exclusivos para siempre.
+              Solo las primeras 5.000 reservas recibir├ín el estatus de Fundador con beneficios exclusivos para siempre.
             </p>
           </ScrollReveal>
         </div>
@@ -50,13 +50,13 @@ export function FundadoresSection() {
               style={{ boxShadow: '0 0 60px rgba(255, 200, 61, 0.15)' }}>
               
               <div className="text-chispa font-inter font-semibold text-sm uppercase tracking-wider mb-2">
-                Edición Fundadores
+                Edici├│n Fundadores
               </div>
               <div className="text-gradient-gold font-poppins font-black text-6xl md:text-7xl mb-2">
-                Nº <CountUp end={1} duration={1} />XXX
+                N┬║ <CountUp end={1} duration={1} />XXX
               </div>
               <div className="text-white/60 text-sm mb-6">
-                Tu número único de fundador
+                Tu n├║mero ├║nico de fundador
               </div>
               
               <img 
@@ -67,7 +67,7 @@ export function FundadoresSection() {
               
               <div className="space-y-2 text-sm text-white/70">
                 <p>Certificado digital numerado</p>
-                <p>Número de fundador para siempre</p>
+                <p>N├║mero de fundador para siempre</p>
                 <p>Acceso prioritario a futuras ediciones</p>
               </div>
             </div>
@@ -99,9 +99,9 @@ export function FundadoresSection() {
             <div className="glass rounded-2xl p-6">
               <div className="flex justify-between text-sm mb-3">
                 <span className="text-white/60">
-                  <CountUp end={reservationCount} duration={2} separator="." /> reservas
+                  <CountUp end={reservationCount ?? 0} duration={2} separator="." /> reservas
                 </span>
-                <span className="text-chispa font-bold">5.000 máx.</span>
+                <span className="text-chispa font-bold">5.000 m├íx.</span>
               </div>
               
               <div className="h-4 bg-white/10 rounded-full overflow-hidden mb-3">

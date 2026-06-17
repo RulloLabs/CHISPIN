@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Home, BookOpen, Gift, Gamepad2, Users, HelpCircle, Menu, X } from 'lucide-react';
+import * as Tooltip from '@radix-ui/react-tooltip';
 import { useReservation } from '@/context/ReservationContext';
 
 const navLinks = [
-  { label: 'Inicio', href: '#hero' },
-  { label: 'Historia', href: '#origen' },
-  { label: 'El Peluche', href: '#producto' },
-  { label: 'Experiencia', href: '#experiencia' },
-  { label: 'La Manada', href: '#comunidad' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Inicio', href: '#hero', icon: Home },
+  { label: 'Historia', href: '#origen', icon: BookOpen },
+  { label: 'El Peluche', href: '#producto', icon: Gift },
+  { label: 'Experiencia', href: '#experiencia', icon: Gamepad2 },
+  { label: 'La Manada', href: '#comunidad', icon: Users },
+  { label: 'FAQ', href: '#faq', icon: HelpCircle },
 ];
 
 export function Navigation() {
@@ -47,22 +48,41 @@ export function Navigation() {
           {/* Logo */}
           <a href="#hero" onClick={e => { e.preventDefault(); scrollTo('#hero'); }}
             className="flex items-center gap-2 group">
-            <img src="/images/logo.png" alt="Chispín" className="h-8 w-auto" />
+            <img src="/images/logo.png" alt="Chisp├¡n" className="h-8 w-auto" />
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-7">
-            {navLinks.map(link => (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                className="text-white/70 hover:text-white text-sm font-nunito font-700 uppercase tracking-wider transition-colors duration-200 relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-[#FFB800] transition-all duration-300 group-hover:w-full rounded-full" />
-              </button>
-            ))}
-          </div>
+          <Tooltip.Provider delayDuration={200}>
+            <div className="hidden md:flex items-center gap-3">
+              {navLinks.map(link => {
+                const Icon = link.icon;
+                return (
+                  <Tooltip.Root key={link.href}>
+                    <Tooltip.Trigger asChild>
+                      <button
+                        onClick={() => scrollTo(link.href)}
+                        className="p-2.5 text-white/60 hover:text-[#FFB800] transition-colors duration-200 relative group"
+                        aria-label={link.label}
+                      >
+                        <Icon className="w-5 h-5" />
+                        <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#FFB800] transition-all duration-300 group-hover:w-full rounded-full" />
+                      </button>
+                    </Tooltip.Trigger>
+                    <Tooltip.Portal>
+                      <Tooltip.Content
+                        side="bottom"
+                        sideOffset={6}
+                        className="bg-[#2D0A5C] text-white text-xs font-nunito font-bold px-3 py-1.5 rounded-md shadow-lg"
+                      >
+                        {link.label}
+                        <Tooltip.Arrow className="fill-[#2D0A5C]" />
+                      </Tooltip.Content>
+                    </Tooltip.Portal>
+                  </Tooltip.Root>
+                );
+              })}
+            </div>
+          </Tooltip.Provider>
 
           {/* CTA */}
           <div className="flex items-center gap-3">
@@ -70,12 +90,12 @@ export function Navigation() {
               onClick={openClawMachine}
               className="hidden md:flex btn-primary text-xs py-2.5 px-5"
             >
-              🔥 Acepta tu Chispín
+              ­ƒöÑ Acepta tu Chisp├¡n
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
-              aria-label="Menú"
+              aria-label="Men├║"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -101,7 +121,7 @@ export function Navigation() {
               onClick={() => { setMobileOpen(false); openClawMachine(); }}
               className="btn-primary mt-4 w-full"
             >
-              🔥 Acepta tu Chispín
+              ­ƒöÑ Acepta tu Chisp├¡n
             </button>
           </div>
         </div>
