@@ -1,7 +1,9 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
 import { X } from 'lucide-react';
 import { useReservation } from '@/context/ReservationContext';
-import { Maquina3D, GameHUD, IntroScreen, VictoryScreen, ReserveScreen, NoAttemptsScreen, useSound } from '@/components/game';
+import { GameHUD, IntroScreen, VictoryScreen, ReserveScreen, NoAttemptsScreen, useSound } from '@/components/game';
+
+const Maquina3D = lazy(() => import('@/components/game/Maquina3D').then(m => ({ default: m.Maquina3D })));
 import type { CameraView, ClawPosition, GamePhase } from '@/components/game';
 import {
   ATTEMPTS,
@@ -271,14 +273,16 @@ export function ClawMachineModal() {
 
       <div id="claw-machine-game" className="absolute inset-0 flex items-center justify-center">
         <div className="relative w-full h-full max-w-[1100px] max-h-[900px] aspect-[4/3]">
-          <Maquina3D
-            clawPos={clawPos}
-            cameraView={cameraView}
-            isCatching={isCatching}
-            catchSuccess={catchResult}
-            grabbedIndex={grabbedIndex}
-            onCatchComplete={handleCatchComplete}
-          />
+          <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center bg-[#080012]"><div className="w-12 h-12 border-4 border-[#FFB800] border-t-transparent rounded-full animate-spin" /></div>}>
+            <Maquina3D
+              clawPos={clawPos}
+              cameraView={cameraView}
+              isCatching={isCatching}
+              catchSuccess={catchResult}
+              grabbedIndex={grabbedIndex}
+              onCatchComplete={handleCatchComplete}
+            />
+          </Suspense>
         </div>
 
         <img

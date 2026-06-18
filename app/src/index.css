@@ -232,3 +232,43 @@
 .animate-pulse-glow {
   animation: pulseGlow 2s ease-in-out infinite;
 }
+
+/* ───── Reduced Motion ───── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 8px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: #FFB800;
+  color: #1A0040;
+  font-weight: 700;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: top 0.1s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float,
+  .animate-spark-rise,
+  .animate-pulse-glow {
+    animation: none !important;
+  }
+  .neon-border {
+    animation: none !important;
+    border-color: #FFB800;
+  }
+}

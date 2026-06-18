@@ -20,8 +20,24 @@ export default function Home() {
       {/* Navigation */}
       <Navigation />
       
+      {/* Schema.org structured data */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": "Chispín - Edición Fundadores",
+          "description": "Chispín es un pequeño ternero de peluche con una llama en la punta de la cola. Rescata tu Chispín Edición Fundadores y forma parte de la primera generación.",
+          "brand": { "@type": "Brand", "name": "Chispín" },
+          "offers": {
+            "@type": "Offer",
+            "price": "39",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          }
+        })
+      }} />
       {/* Sections */}
-      <main>
+      <main id="main-content">
         <HeroSection />
         <OrigenSection />
         <ProductoSection />
